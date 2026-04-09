@@ -1,0 +1,14 @@
+/* Styles for the theme switcher */
+.theme-switcher {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
+
+.theme-switcher select {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 4px;
+}
