@@ -1,4 +1,4 @@
-name: CI
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -8,11 +8,21 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    defaults:
+      run:
+        working-directory: ods-app
 
     steps:
     - name: Checkout repository
@@ -22,15 +32,28 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 24
+        cache: npm
+        cache-dependency-path: ods-app/package-lock.json
 
     - name: Install dependencies
-      run: npm install
+      run: npm ci
 
     - name: Run build
       run: npm run build
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        name: build-artifacts
-        path: dist/
+        path: ods-app/dist
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
