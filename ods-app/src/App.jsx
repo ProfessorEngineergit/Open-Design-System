@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import UIMixologyEngine from './components/UIMixologyEngine';
 import './App.css';
 
@@ -70,8 +70,8 @@ const defaultSnippetDraft = {
 };
 
 const createSnippetId = () => {
-  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
-    return crypto.randomUUID();
+  if (globalThis.crypto?.randomUUID) {
+    return globalThis.crypto.randomUUID();
   }
   return `snippet-${Date.now()}-${Math.round(Math.random() * 100000)}`;
 };
@@ -154,6 +154,16 @@ const App = () => {
   const [snippetDraft, setSnippetDraft] = useState(defaultSnippetDraft);
   const [customSnippets, setCustomSnippets] = useState([]);
   const [copyState, setCopyState] = useState('');
+  const copyTimeoutRef = useRef(null);
+
+  useEffect(
+    () => () => {
+      if (copyTimeoutRef.current) {
+        window.clearTimeout(copyTimeoutRef.current);
+      }
+    },
+    []
+  );
 
   const architecturePlan = useMemo(
     () => [
@@ -189,7 +199,7 @@ const App = () => {
   const fallbackCopy = (text) => {
     const temporaryTextArea = document.createElement('textarea');
     temporaryTextArea.value = text;
-    temporaryTextArea.setAttribute('readonly', 'readonly');
+    temporaryTextArea.readOnly = true;
     temporaryTextArea.style.position = 'absolute';
     temporaryTextArea.style.left = '-9999px';
     document.body.appendChild(temporaryTextArea);
@@ -207,7 +217,13 @@ const App = () => {
         throw new Error('copy-failed');
       }
       setCopyState(`${label} kopiert.`);
-      window.setTimeout(() => setCopyState(''), 1800);
+      if (copyTimeoutRef.current) {
+        window.clearTimeout(copyTimeoutRef.current);
+      }
+      copyTimeoutRef.current = window.setTimeout(() => {
+        setCopyState('');
+        copyTimeoutRef.current = null;
+      }, 1800);
     } catch {
       setCopyState('Clipboard nicht verfügbar. Bitte manuell kopieren.');
     }
