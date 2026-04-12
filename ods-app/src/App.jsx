@@ -168,7 +168,7 @@ const App = () => {
   const architecturePlan = useMemo(
     () => [
       'Frontend: React + Vite (lokal, ohne Backend), kompletter State in App-Level.',
-      'ODS-Flow in 5 Panels: Intro, Functional Prompt, Mixology, Custom-Snippets, Blend-Output.',
+      'ODS-Flow in 5 Panels: Architektur, Functional Prompt, Mixology, Custom-Snippets, Blend-Output.',
       'Prompt-Engine: Live-Generierung aus Taxonomie + Kontrollparametern + Snippet-Mappings.',
       'Theming: App-weite CSS-Variablen mit Theme-Switcher für Developer-Looks.',
       'Lokaler Start: npm install && npm run dev (oder npm run build && npm run serve).',
@@ -231,7 +231,7 @@ const App = () => {
 
   const addSnippet = () => {
     if (!snippetDraft.code.trim()) return;
-    const normalizedTarget = snippetDraft.target.trim() || 'Unmapped Component';
+    const normalizedTarget = snippetDraft.target.trim() || 'Nicht zugeordnete Komponente';
     setCustomSnippets((prev) => [
       ...prev,
       { id: createSnippetId(), ...snippetDraft, target: normalizedTarget, code: snippetDraft.code.trim() },
