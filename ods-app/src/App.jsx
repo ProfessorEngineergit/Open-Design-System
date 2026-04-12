@@ -76,6 +76,65 @@ const createSnippetId = () => {
   return `snippet-${Date.now()}-${Math.round(Math.random() * 100000)}`;
 };
 
+const buildSnippetSection = (customSnippets, materialityLabel, vibeLabel) => {
+  if (customSnippets.length === 0) {
+    return '- Keine Custom-Snippets hinterlegt. Nutze die globale Stildefinition für alle Komponenten.';
+  }
+
+  return customSnippets
+    .map((snippet, index) => {
+      const instructions = [
+        `${index + 1}. Zielkomponente: ${snippet.target}`,
+        '   Referenz-Code:',
+        snippet.code,
+        `   Vorgabe: Repliziere die Struktur exakt für ${snippet.target} und überlagere zusätzlich die globale Materialität (${materialityLabel}) plus Vibe-Layer (${vibeLabel}).`,
+      ];
+      return instructions.join('\n');
+    })
+    .join('\n\n');
+};
+
+const buildBlendPrompt = ({ engineState, geometry, materiality, vibe, snippetSection }) => {
+  const globalMix = [
+    `- Basis-Geometrie: ${geometry.label} -> ${geometry.note}`,
+    `- Materialität & Textur: ${materiality.label} -> ${materiality.note}`,
+    `- Vibe-Layer: ${vibe.label} -> ${vibe.note}`,
+    `- Globaler Farb-Tint: ${engineState.tint}`,
+    `- Intensität: ${engineState.intensity}/100`,
+    `- Textur-Stärke: ${engineState.textureStrength}/100`,
+    `- Tiefen-Layer: ${engineState.depthLayers}`,
+    `- Kontroll-Skalierung: ${engineState.controlScale}x`,
+    `- Scanlines aktiv: ${engineState.enableScanlines ? 'Ja' : 'Nein'}`,
+    `- Micro-Glow aktiv: ${engineState.enableMicroGlow ? 'Ja' : 'Nein'}`,
+    `- A11y-Kontrast absichern: ${engineState.enforceAccessibility ? 'Ja' : 'Nein'}`,
+  ];
+
+  const fixedRules = [
+    '1) Ändere keine Logik, kein Datenmodell, keine Event-Handler, keine Accessibility-Labels.',
+    '2) Verändere nur visuelle Schicht (CSS/Design-Tokens/Design-spezifische Klassen).',
+    '3) Alle bestehenden Flows müssen funktional identisch bleiben.',
+    `4) Logic-Lock aktiv: ${engineState.preserveLogicLock ? 'Erzwungen (keine Strukturänderung)' : 'Locker (minimal notwendige Strukturänderung nur bei Stil-Zwang)'}.`,
+  ];
+
+  return [
+    'SYSTEM-ROLLE: Du bist Senior UI Engineer. Du erhältst bereits funktionierenden Code.',
+    '',
+    'UNVERHANDELBAR:',
+    ...fixedRules,
+    '',
+    'GLOBALER STYLE-MIX:',
+    ...globalMix,
+    '',
+    'CUSTOM KOMPONENTEN-MAPPINGS:',
+    snippetSection,
+    '',
+    'OUTPUT-ANWEISUNG:',
+    '- Liefere nur die aktualisierte Styling-Schicht (CSS, ggf. tokenisierte Variablen und ausschließlich notwendige Klassenzuweisungen).',
+    '- Behalte bestehende Komponentenstruktur maximal stabil.',
+    '- Dokumentiere in 5-10 Bullet Points, welche visuellen Entscheidungen umgesetzt wurden und warum sie zum Mix passen.',
+  ].join('\n');
+};
+
 const App = () => {
   const [theme, setTheme] = useState('matrix');
   const [engineState, setEngineState] = useState({
@@ -122,18 +181,9 @@ const App = () => {
     const geometry = DESIGN_LIBRARY.geometry[engineState.geometry];
     const materiality = DESIGN_LIBRARY.materiality[engineState.materiality];
     const vibe = DESIGN_LIBRARY.vibes[engineState.vibe];
+    const snippetSection = buildSnippetSection(customSnippets, materiality.label, vibe.label);
 
-    const snippetSection =
-      customSnippets.length === 0
-        ? '- Keine Custom-Snippets hinterlegt. Nutze die globale Stildefinition für alle Komponenten.'
-        : customSnippets
-            .map(
-              (snippet, index) =>
-                `${index + 1}. Zielkomponente: ${snippet.target}\n   Referenz-Code:\n${snippet.code}\n   Vorgabe: Repliziere die Struktur exakt für ${snippet.target} und überlagere zusätzlich die globale Materialität (${materiality.label}) plus Vibe-Layer (${vibe.label}).`
-            )
-            .join('\n\n');
-
-    return `SYSTEM-ROLLE: Du bist Senior UI Engineer. Du erhältst bereits funktionierenden Code.\n\nUNVERHANDELBAR:\n1) Ändere keine Logik, kein Datenmodell, keine Event-Handler, keine Accessibility-Labels.\n2) Verändere nur visuelle Schicht (CSS/Design-Tokens/Design-spezifische Klassen).\n3) Alle bestehenden Flows müssen funktional identisch bleiben.\n\nGLOBALER STYLE-MIX:\n- Basis-Geometrie: ${geometry.label} -> ${geometry.note}\n- Materialität & Textur: ${materiality.label} -> ${materiality.note}\n- Vibe-Layer: ${vibe.label} -> ${vibe.note}\n- Globaler Farb-Tint: ${engineState.tint}\n- Intensität: ${engineState.intensity}/100\n- Textur-Stärke: ${engineState.textureStrength}/100\n- Tiefen-Layer: ${engineState.depthLayers}\n- Kontroll-Skalierung: ${engineState.controlScale}x\n- Scanlines aktiv: ${engineState.enableScanlines ? 'Ja' : 'Nein'}\n- Micro-Glow aktiv: ${engineState.enableMicroGlow ? 'Ja' : 'Nein'}\n- A11y-Kontrast absichern: ${engineState.enforceAccessibility ? 'Ja' : 'Nein'}\n\nCUSTOM KOMPONENTEN-MAPPINGS:\n${snippetSection}\n\nOUTPUT-ANWEISUNG:\n- Liefere nur die aktualisierte Styling-Schicht (CSS, ggf. tokenisierte Variablen und ausschließlich notwendige Klassenzuweisungen).\n- Behalte bestehende Komponentenstruktur maximal stabil.\n- Dokumentiere in 5-10 Bullet Points, welche visuellen Entscheidungen umgesetzt wurden und warum sie zum Mix passen.`;
+    return buildBlendPrompt({ engineState, geometry, materiality, vibe, snippetSection });
   }, [engineState, customSnippets]);
 
   const fallbackCopy = (text) => {
@@ -271,7 +321,7 @@ const App = () => {
             <p className='hint'>Noch keine Snippets hinzugefügt.</p>
           ) : (
             customSnippets.map((snippet, index) => (
-              <article key={snippet.id || `${snippet.target}-${index}`} className='snippet-item'>
+              <article key={snippet.id} className='snippet-item'>
                 <div>
                   <strong>{snippet.target}</strong>
                   <pre>{snippet.code}</pre>
