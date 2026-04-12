@@ -69,11 +69,14 @@ const defaultSnippetDraft = {
   code: '',
 };
 
+let snippetCounter = 0;
+
 const createSnippetId = () => {
   if (globalThis.crypto?.randomUUID) {
     return globalThis.crypto.randomUUID();
   }
-  return `snippet-${Date.now()}-${Math.round(Math.random() * 100000)}`;
+  snippetCounter += 1;
+  return `snippet-${Date.now()}-${snippetCounter}`;
 };
 
 const buildSnippetSection = (customSnippets, materialityLabel, vibeLabel) => {
@@ -231,7 +234,7 @@ const App = () => {
 
   const addSnippet = () => {
     if (!snippetDraft.code.trim()) return;
-    const normalizedTarget = snippetDraft.target.trim() || 'Nicht zugeordnete Komponente';
+    const normalizedTarget = snippetDraft.target.trim() || 'Unbenannte Komponente';
     setCustomSnippets((prev) => [
       ...prev,
       { id: createSnippetId(), ...snippetDraft, target: normalizedTarget, code: snippetDraft.code.trim() },
