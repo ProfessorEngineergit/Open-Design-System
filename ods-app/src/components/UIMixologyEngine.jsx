@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-
-const [customCodeSnippets, setCustomCodeSnippets] = useState('');
 import Slider from './Slider';
 import Toggle from './Toggle';
 
@@ -10,26 +8,50 @@ const UIMixologyEngine = ({ onUpdate }) => {
     dropdownValue: 'default',
     toggleState: false,
   });
+  const [customCodeSnippets] = useState('');
+
+  const generateOutputPrompt = (updatedDesignElements, customCodeSnippetText) => {
+    let prompt = 'Design Elements:\n';
+
+    if (updatedDesignElements.sliderValue !== undefined) {
+      prompt += `- Slider Value: ${updatedDesignElements.sliderValue}\n`;
+    }
+
+    if (updatedDesignElements.dropdownValue !== undefined) {
+      prompt += `- Dropdown Value: ${updatedDesignElements.dropdownValue}\n`;
+    }
+
+    if (updatedDesignElements.toggleState !== undefined) {
+      prompt += `- Toggle State: ${updatedDesignElements.toggleState}\n`;
+    }
+
+    if (customCodeSnippetText) {
+      prompt += '\nCustom Code Snippets:\n';
+      prompt += customCodeSnippetText;
+    }
+
+    console.log(prompt);
+  };
+
+  const updateDesignElements = (updates) => {
+    setDesignElements((prev) => {
+      const updatedDesignElements = { ...prev, ...updates };
+      onUpdate(updatedDesignElements);
+      generateOutputPrompt(updatedDesignElements, customCodeSnippets);
+      return updatedDesignElements;
+    });
+  };
 
   const handleSliderChange = (value) => {
-    setDesignElements((prev) => ({ ...prev, sliderValue: value }));
-    const updatedDesignElements = { ...designElements, sliderValue: value };
-    onUpdate(updatedDesignElements);
-    generateOutputPrompt(updatedDesignElements, customCodeSnippets);
+    updateDesignElements({ sliderValue: value });
   };
 
   const handleDropdownChange = (value) => {
-    setDesignElements((prev) => ({ ...prev, dropdownValue: value }));
-    const updatedDesignElements = { ...designElements, dropdownValue: value };
-    onUpdate(updatedDesignElements);
-    generateOutputPrompt(updatedDesignElements, customCodeSnippets);
+    updateDesignElements({ dropdownValue: value });
   };
 
   const handleToggleChange = (value) => {
-    setDesignElements((prev) => ({ ...prev, toggleState: value }));
-    const updatedDesignElements = { ...designElements, toggleState: value };
-    onUpdate(updatedDesignElements);
-    generateOutputPrompt(updatedDesignElements, customCodeSnippets);
+    updateDesignElements({ toggleState: value });
   };
 
   return (
@@ -37,7 +59,7 @@ const UIMixologyEngine = ({ onUpdate }) => {
       <Slider
         label='Design Element Intensity'
         value={designElements.sliderValue}
-        onChange={handleSliderChange}
+        onChange={(event) => handleSliderChange(Number(event.target.value))}
       />
       <select
         value={designElements.dropdownValue}
@@ -50,53 +72,10 @@ const UIMixologyEngine = ({ onUpdate }) => {
       <Toggle
         label='Enable Feature'
         checked={designElements.toggleState}
-        onChange={handleToggleChange}
+        onChange={(event) => handleToggleChange(event.target.checked)}
       />
     </div>
   );
-
-  // Test with default values
-  React.useEffect(() => {
-    const testDesignElements = {
-      sliderValue: 50,
-      dropdownValue: 'default',
-      toggleState: false,
-    };
-    generateOutputPrompt(testDesignElements, '');
-  }, []);
-
-  // Test with custom values
-  React.useEffect(() => {
-    const testDesignElements = {
-      sliderValue: 75,
-      dropdownValue: 'variant1',
-      toggleState: true,
-    };
-    generateOutputPrompt(testDesignElements, 'console.log("Custom Code Snippet")');
-  }, []);
-
-  const generateOutputPrompt = (designElements, customCodeSnippets) => {
-    let prompt = 'Design Elements:\n';
-
-    if (designElements.sliderValue !== undefined) {
-      prompt += `- Slider Value: ${designElements.sliderValue}\n`;
-    }
-
-    if (designElements.dropdownValue !== undefined) {
-      prompt += `- Dropdown Value: ${designElements.dropdownValue}\n`;
-    }
-
-    if (designElements.toggleState !== undefined) {
-      prompt += `- Toggle State: ${designElements.toggleState}\n`;
-    }
-
-    if (customCodeSnippets) {
-      prompt += '\nCustom Code Snippets:\n';
-      prompt += customCodeSnippets;
-    }
-
-    console.log(prompt);
-  };
 };
 
 export default UIMixologyEngine;
