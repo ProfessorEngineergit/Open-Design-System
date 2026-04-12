@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6.0.2
 
     - name: Set up Node.js 24
       uses: actions/setup-node@v3
@@ -30,7 +30,7 @@ jobs:
       run: npm run build
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7.0.0
       with:
         name: build-artifacts
         path: dist/
