@@ -69,6 +69,13 @@ const defaultSnippetDraft = {
   code: '',
 };
 
+const createSnippetId = () => {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  return `snippet-${Date.now()}-${Math.round(Math.random() * 100000)}`;
+};
+
 const App = () => {
   const [theme, setTheme] = useState('matrix');
   const [engineState, setEngineState] = useState({
@@ -158,7 +165,11 @@ const App = () => {
 
   const addSnippet = () => {
     if (!snippetDraft.code.trim()) return;
-    setCustomSnippets((prev) => [...prev, { ...snippetDraft, code: snippetDraft.code.trim() }]);
+    const normalizedTarget = snippetDraft.target.trim() || 'Unmapped Component';
+    setCustomSnippets((prev) => [
+      ...prev,
+      { id: createSnippetId(), ...snippetDraft, target: normalizedTarget, code: snippetDraft.code.trim() },
+    ]);
     setSnippetDraft(defaultSnippetDraft);
   };
 
@@ -239,7 +250,7 @@ const App = () => {
               type='text'
               value={snippetDraft.target}
               placeholder='z.B. Button'
-              onChange={(event) => setSnippetDraft((prev) => ({ ...prev, target: event.target.value || 'Button' }))}
+              onChange={(event) => setSnippetDraft((prev) => ({ ...prev, target: event.target.value }))}
             />
           </label>
           <label>
@@ -260,7 +271,7 @@ const App = () => {
             <p className='hint'>Noch keine Snippets hinzugefügt.</p>
           ) : (
             customSnippets.map((snippet, index) => (
-              <article key={`${snippet.target}-${index}`} className='snippet-item'>
+              <article key={snippet.id || `${snippet.target}-${index}`} className='snippet-item'>
                 <div>
                   <strong>{snippet.target}</strong>
                   <pre>{snippet.code}</pre>
