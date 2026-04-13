@@ -82,7 +82,7 @@ const UIMixologyEngine = ({ value, onChange, designLibrary }) => {
       </label>
 
       <Slider
-        label='Button-Rundheit (px)'
+        label='Button-Rundung (px)'
         value={value.buttonRoundness}
         min={0}
         max={40}

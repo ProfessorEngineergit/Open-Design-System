@@ -83,6 +83,17 @@ const TINT_LIBRARY = {
   Orange: { accent: '#ffb065', accentStrong: '#ff7c2b' },
 };
 
+const BUTTON_PREVIEW_LIMITS = {
+  glossMin: 0.15,
+  glossMax: 0.95,
+  shadowMin: 0.08,
+  shadowMax: 0.8,
+  borderMin: 0.2,
+  borderMax: 0.95,
+  iconFontMin: 14,
+  iconFontBase: 17,
+};
+
 const createSnippetId = () => {
   if (globalThis.crypto?.randomUUID) {
     return globalThis.crypto.randomUUID();
@@ -225,9 +236,18 @@ const App = () => {
 
   const previewStyles = useMemo(() => {
     const tint = TINT_LIBRARY[engineState.tint] || TINT_LIBRARY.Rot;
-    const glossOpacity = Math.min(0.95, Math.max(0.15, engineState.buttonGloss / 100));
-    const shadowOpacity = Math.min(0.8, Math.max(0.08, engineState.buttonShadow / 100));
-    const borderOpacity = Math.min(0.95, Math.max(0.2, engineState.intensity / 100));
+    const glossOpacity = Math.min(
+      BUTTON_PREVIEW_LIMITS.glossMax,
+      Math.max(BUTTON_PREVIEW_LIMITS.glossMin, engineState.buttonGloss / 100)
+    );
+    const shadowOpacity = Math.min(
+      BUTTON_PREVIEW_LIMITS.shadowMax,
+      Math.max(BUTTON_PREVIEW_LIMITS.shadowMin, engineState.buttonShadow / 100)
+    );
+    const borderOpacity = Math.min(
+      BUTTON_PREVIEW_LIMITS.borderMax,
+      Math.max(BUTTON_PREVIEW_LIMITS.borderMin, engineState.intensity / 100)
+    );
     const blurAmount = 8 + Math.round((engineState.textureStrength / 100) * 12);
     const fontSize = Math.round(15 * engineState.controlScale);
     const materialStyles = {
@@ -411,7 +431,10 @@ const App = () => {
               width: `${engineState.buttonHeight}px`,
               padding: 0,
               borderRadius: '999px',
-              fontSize: `${Math.max(14, Math.round(17 * engineState.controlScale))}px`,
+              fontSize: `${Math.max(
+                BUTTON_PREVIEW_LIMITS.iconFontMin,
+                Math.round(BUTTON_PREVIEW_LIMITS.iconFontBase * engineState.controlScale)
+              )}px`,
             }}
             aria-label='Favorites'
             type='button'
