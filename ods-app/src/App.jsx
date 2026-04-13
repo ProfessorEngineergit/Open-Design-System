@@ -37,7 +37,7 @@ const DESIGN_LIBRARY = {
       label: 'Claymorphism',
       note: 'weiche, matte, aufgeblasene Flächen mit volumetrischen Schatten',
     },
-    neumorphism2: {
+    neumorphism: {
       label: 'Neumorphism 2.0 / Cyber-Skeuomorphismus',
       note: 'haptische Physik, deutliche Highlights und klare Tiefensignale',
     },
@@ -173,7 +173,7 @@ const buildBlendPrompt = ({ engineState, geometry, materiality, vibe, snippetSec
     `- Tiefen-Layer: ${engineState.depthLayers}`,
     `- Kontroll-Skalierung: ${engineState.controlScale}x`,
     `- Button-Material: ${engineState.buttonMaterial}`,
-    `- Button-Rundheit: ${engineState.buttonRoundness}px`,
+    `- Button-Rundung: ${engineState.buttonRoundness}px`,
     `- Button-Höhe: ${engineState.buttonHeight}px`,
     `- Button-Randstärke: ${engineState.buttonBorderWidth}px`,
     `- Button-Glanz: ${engineState.buttonGloss}/100`,
@@ -317,7 +317,7 @@ const App = () => {
         boxShadow: `inset 6px 6px 14px rgba(255,255,255,${clay.highlightBase + glossOpacity * clay.highlightGlossMultiplier}), inset -8px -8px 14px rgba(0,0,0,0.35), 0 10px 24px rgba(0,0,0,${shadowOpacity})`,
         backdropFilter: 'none',
       },
-      neumorphism2: {
+      neumorphism: {
         background: `linear-gradient(150deg, #151b24 0%, #0c1017 100%)`,
         borderColor: `${tint.accent}${neumorphism.borderAlpha}`,
         boxShadow: `inset 1px 1px 0 rgba(255,255,255,${neumorphism.highlightBase + glossOpacity * neumorphism.highlightGlossMultiplier}), inset -1px -1px 0 rgba(0,0,0,${neumorphism.insetShadowDarkOpacity}), 0 0 ${neumorphism.glowBase + Math.round(engineState.intensity / neumorphism.glowDivider)}px ${tint.accentStrong}${neumorphism.glowAlpha}, 0 ${neumorphism.outerShadowOffsetY}px ${neumorphism.outerShadowBlur}px rgba(0,0,0,${shadowOpacity})`,
