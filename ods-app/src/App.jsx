@@ -90,8 +90,50 @@ const BUTTON_PREVIEW_LIMITS = {
   shadowMax: 0.8,
   borderMin: 0.2,
   borderMax: 0.95,
+  blurBase: 8,
+  blurMultiplier: 12,
+  baseFontSize: 15,
   iconFontMin: 14,
   iconFontBase: 17,
+  appleLiquidGlass: {
+    highlightBase: 0.2,
+    highlightGlossMultiplier: 0.25,
+    tintAccentAlpha: '4f',
+    tintAccentStrongAlpha: '2a',
+    borderBase: 0.25,
+    borderMultiplier: 0.35,
+    shadowBlur: 28,
+    shadowOffsetY: 12,
+    saturation: 150,
+  },
+  liquidGlass: {
+    highlightBase: 0.14,
+    highlightGlossMultiplier: 0.2,
+    tintAlpha: '66',
+    borderBase: 0.2,
+    borderMultiplier: 0.25,
+    shadowBlur: 20,
+    shadowOffsetY: 10,
+  },
+  claymorphism: {
+    borderBase: 0.12,
+    borderMultiplier: 0.22,
+    highlightBase: 0.16,
+    highlightGlossMultiplier: 0.15,
+    tintAccentAlpha: 'e8',
+    tintAccentStrongAlpha: 'f2',
+  },
+  neumorphism: {
+    highlightBase: 0.1,
+    highlightGlossMultiplier: 0.12,
+    insetShadowDarkOpacity: 0.6,
+    glowBase: 8,
+    glowDivider: 6,
+    outerShadowBlur: 25,
+    outerShadowOffsetY: 12,
+    borderAlpha: '99',
+    glowAlpha: '66',
+  },
 };
 
 const createSnippetId = () => {
@@ -248,31 +290,37 @@ const App = () => {
       BUTTON_PREVIEW_LIMITS.borderMax,
       Math.max(BUTTON_PREVIEW_LIMITS.borderMin, engineState.intensity / 100)
     );
-    const blurAmount = 8 + Math.round((engineState.textureStrength / 100) * 12);
-    const fontSize = Math.round(15 * engineState.controlScale);
+    const blurAmount =
+      BUTTON_PREVIEW_LIMITS.blurBase +
+      Math.round((engineState.textureStrength / 100) * BUTTON_PREVIEW_LIMITS.blurMultiplier);
+    const fontSize = Math.round(BUTTON_PREVIEW_LIMITS.baseFontSize * engineState.controlScale);
+    const apple = BUTTON_PREVIEW_LIMITS.appleLiquidGlass;
+    const liquid = BUTTON_PREVIEW_LIMITS.liquidGlass;
+    const clay = BUTTON_PREVIEW_LIMITS.claymorphism;
+    const neumorphism = BUTTON_PREVIEW_LIMITS.neumorphism;
     const materialStyles = {
       appleLiquidGlass: {
-        background: `linear-gradient(140deg, rgba(255,255,255,${0.2 + glossOpacity * 0.25}) 0%, rgba(255,255,255,0.08) 35%, rgba(0,0,0,0.25) 100%), radial-gradient(circle at 20% 10%, ${tint.accent}4f 0%, ${tint.accentStrong}2a 60%, #09111a 100%)`,
-        borderColor: `rgba(255,255,255,${0.25 + borderOpacity * 0.35})`,
-        boxShadow: `inset 0 1px 0 rgba(255,255,255,${0.35 + glossOpacity * 0.25}), inset 0 -1px 0 rgba(0,0,0,0.35), 0 12px 28px rgba(0,0,0,${shadowOpacity})`,
-        backdropFilter: `blur(${blurAmount}px) saturate(150%)`,
+        background: `linear-gradient(140deg, rgba(255,255,255,${apple.highlightBase + glossOpacity * apple.highlightGlossMultiplier}) 0%, rgba(255,255,255,0.08) 35%, rgba(0,0,0,0.25) 100%), radial-gradient(circle at 20% 10%, ${tint.accent}${apple.tintAccentAlpha} 0%, ${tint.accentStrong}${apple.tintAccentStrongAlpha} 60%, #09111a 100%)`,
+        borderColor: `rgba(255,255,255,${apple.borderBase + borderOpacity * apple.borderMultiplier})`,
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,${0.35 + glossOpacity * apple.highlightGlossMultiplier}), inset 0 -1px 0 rgba(0,0,0,0.35), 0 ${apple.shadowOffsetY}px ${apple.shadowBlur}px rgba(0,0,0,${shadowOpacity})`,
+        backdropFilter: `blur(${blurAmount}px) saturate(${apple.saturation}%)`,
       },
       liquidGlass: {
-        background: `linear-gradient(180deg, rgba(255,255,255,${0.14 + glossOpacity * 0.2}), rgba(255,255,255,0.03)), linear-gradient(135deg, ${tint.accentStrong}66 0%, #0d1520 100%)`,
-        borderColor: `rgba(255,255,255,${0.2 + borderOpacity * 0.25})`,
-        boxShadow: `inset 0 1px 0 rgba(255,255,255,${0.25 + glossOpacity * 0.2}), 0 10px 20px rgba(0,0,0,${shadowOpacity})`,
+        background: `linear-gradient(180deg, rgba(255,255,255,${liquid.highlightBase + glossOpacity * liquid.highlightGlossMultiplier}), rgba(255,255,255,0.03)), linear-gradient(135deg, ${tint.accentStrong}${liquid.tintAlpha} 0%, #0d1520 100%)`,
+        borderColor: `rgba(255,255,255,${liquid.borderBase + borderOpacity * liquid.borderMultiplier})`,
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,${0.25 + glossOpacity * liquid.highlightGlossMultiplier}), 0 ${liquid.shadowOffsetY}px ${liquid.shadowBlur}px rgba(0,0,0,${shadowOpacity})`,
         backdropFilter: `blur(${Math.max(4, blurAmount - 2)}px)`,
       },
       claymorphism: {
-        background: `linear-gradient(155deg, ${tint.accent}e8 0%, ${tint.accentStrong}f2 100%)`,
-        borderColor: `rgba(255,255,255,${0.12 + borderOpacity * 0.22})`,
-        boxShadow: `inset 6px 6px 14px rgba(255,255,255,${0.16 + glossOpacity * 0.15}), inset -8px -8px 14px rgba(0,0,0,0.35), 0 10px 24px rgba(0,0,0,${shadowOpacity})`,
+        background: `linear-gradient(155deg, ${tint.accent}${clay.tintAccentAlpha} 0%, ${tint.accentStrong}${clay.tintAccentStrongAlpha} 100%)`,
+        borderColor: `rgba(255,255,255,${clay.borderBase + borderOpacity * clay.borderMultiplier})`,
+        boxShadow: `inset 6px 6px 14px rgba(255,255,255,${clay.highlightBase + glossOpacity * clay.highlightGlossMultiplier}), inset -8px -8px 14px rgba(0,0,0,0.35), 0 10px 24px rgba(0,0,0,${shadowOpacity})`,
         backdropFilter: 'none',
       },
       neumorphism2: {
         background: `linear-gradient(150deg, #151b24 0%, #0c1017 100%)`,
-        borderColor: `${tint.accent}99`,
-        boxShadow: `inset 1px 1px 0 rgba(255,255,255,${0.1 + glossOpacity * 0.12}), inset -1px -1px 0 rgba(0,0,0,0.6), 0 0 ${8 + Math.round(engineState.intensity / 6)}px ${tint.accentStrong}66, 0 12px 25px rgba(0,0,0,${shadowOpacity})`,
+        borderColor: `${tint.accent}${neumorphism.borderAlpha}`,
+        boxShadow: `inset 1px 1px 0 rgba(255,255,255,${neumorphism.highlightBase + glossOpacity * neumorphism.highlightGlossMultiplier}), inset -1px -1px 0 rgba(0,0,0,${neumorphism.insetShadowDarkOpacity}), 0 0 ${neumorphism.glowBase + Math.round(engineState.intensity / neumorphism.glowDivider)}px ${tint.accentStrong}${neumorphism.glowAlpha}, 0 ${neumorphism.outerShadowOffsetY}px ${neumorphism.outerShadowBlur}px rgba(0,0,0,${shadowOpacity})`,
         backdropFilter: 'none',
       },
     };
