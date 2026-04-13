@@ -25,6 +25,10 @@ const DESIGN_LIBRARY = {
     },
   },
   materiality: {
+    appleLiquidGlass: {
+      label: 'Apple Liquid Glass',
+      note: 'ultrafeines Glas-Layer mit heller Kante, weichen Highlights und tiefer Unschärfe',
+    },
     liquidGlass: {
       label: 'Liquid Glass',
       note: 'Glassmorphismus mit Blur, Refraktion und transluzenten Kanten',
@@ -33,7 +37,7 @@ const DESIGN_LIBRARY = {
       label: 'Claymorphism',
       note: 'weiche, matte, aufgeblasene Flächen mit volumetrischen Schatten',
     },
-    neumorphism2: {
+    neumorphism: {
       label: 'Neumorphism 2.0 / Cyber-Skeuomorphismus',
       note: 'haptische Physik, deutliche Highlights und klare Tiefensignale',
     },
@@ -71,6 +75,67 @@ const defaultSnippetDraft = {
 
 let snippetCounter = 0;
 
+const TINT_LIBRARY = {
+  Rot: { accent: '#ff5b74', accentStrong: '#ff2e52' },
+  Cyan: { accent: '#5fe8ff', accentStrong: '#27b7de' },
+  Violett: { accent: '#c782ff', accentStrong: '#8f4dd8' },
+  Lime: { accent: '#95ff68', accentStrong: '#57d038' },
+  Orange: { accent: '#ffb065', accentStrong: '#ff7c2b' },
+};
+
+const BUTTON_PREVIEW_LIMITS = {
+  glossMin: 0.15,
+  glossMax: 0.95,
+  shadowMin: 0.08,
+  shadowMax: 0.8,
+  borderMin: 0.2,
+  borderMax: 0.95,
+  blurBase: 8,
+  blurMultiplier: 12,
+  baseFontSize: 15,
+  iconFontMin: 14,
+  iconFontBase: 17,
+  appleLiquidGlass: {
+    highlightBase: 0.2,
+    highlightGlossMultiplier: 0.25,
+    tintAccentAlpha: '4f',
+    tintAccentStrongAlpha: '2a',
+    borderBase: 0.25,
+    borderMultiplier: 0.35,
+    shadowBlur: 28,
+    shadowOffsetY: 12,
+    saturation: 150,
+  },
+  liquidGlass: {
+    highlightBase: 0.14,
+    highlightGlossMultiplier: 0.2,
+    tintAlpha: '66',
+    borderBase: 0.2,
+    borderMultiplier: 0.25,
+    shadowBlur: 20,
+    shadowOffsetY: 10,
+  },
+  claymorphism: {
+    borderBase: 0.12,
+    borderMultiplier: 0.22,
+    highlightBase: 0.16,
+    highlightGlossMultiplier: 0.15,
+    tintAccentAlpha: 'e8',
+    tintAccentStrongAlpha: 'f2',
+  },
+  neumorphism: {
+    highlightBase: 0.1,
+    highlightGlossMultiplier: 0.12,
+    insetShadowDarkOpacity: 0.6,
+    glowBase: 8,
+    glowDivider: 6,
+    outerShadowBlur: 25,
+    outerShadowOffsetY: 12,
+    borderAlpha: '99',
+    glowAlpha: '66',
+  },
+};
+
 const createSnippetId = () => {
   if (globalThis.crypto?.randomUUID) {
     return globalThis.crypto.randomUUID();
@@ -107,6 +172,12 @@ const buildBlendPrompt = ({ engineState, geometry, materiality, vibe, snippetSec
     `- Textur-Stärke: ${engineState.textureStrength}/100`,
     `- Tiefen-Layer: ${engineState.depthLayers}`,
     `- Kontroll-Skalierung: ${engineState.controlScale}x`,
+    `- Button-Material: ${engineState.buttonMaterial}`,
+    `- Button-Rundung: ${engineState.buttonRoundness}px`,
+    `- Button-Höhe: ${engineState.buttonHeight}px`,
+    `- Button-Randstärke: ${engineState.buttonBorderWidth}px`,
+    `- Button-Glanz: ${engineState.buttonGloss}/100`,
+    `- Button-Schatten: ${engineState.buttonShadow}/100`,
     `- Scanlines aktiv: ${engineState.enableScanlines ? 'Ja' : 'Nein'}`,
     `- Micro-Glow aktiv: ${engineState.enableMicroGlow ? 'Ja' : 'Nein'}`,
     `- A11y-Kontrast absichern: ${engineState.enforceAccessibility ? 'Ja' : 'Nein'}`,
@@ -149,6 +220,12 @@ const App = () => {
     textureStrength: 64,
     depthLayers: 5,
     controlScale: 1,
+    buttonMaterial: 'appleLiquidGlass',
+    buttonRoundness: 18,
+    buttonHeight: 46,
+    buttonBorderWidth: 1.2,
+    buttonGloss: 74,
+    buttonShadow: 54,
     preserveLogicLock: true,
     enableScanlines: true,
     enableMicroGlow: true,
@@ -198,6 +275,74 @@ const App = () => {
 
     return buildBlendPrompt({ engineState, geometry, materiality, vibe, snippetSection });
   }, [engineState, customSnippets]);
+
+  const previewStyles = useMemo(() => {
+    const tint = TINT_LIBRARY[engineState.tint] || TINT_LIBRARY.Rot;
+    const glossOpacity = Math.min(
+      BUTTON_PREVIEW_LIMITS.glossMax,
+      Math.max(BUTTON_PREVIEW_LIMITS.glossMin, engineState.buttonGloss / 100)
+    );
+    const shadowOpacity = Math.min(
+      BUTTON_PREVIEW_LIMITS.shadowMax,
+      Math.max(BUTTON_PREVIEW_LIMITS.shadowMin, engineState.buttonShadow / 100)
+    );
+    const borderOpacity = Math.min(
+      BUTTON_PREVIEW_LIMITS.borderMax,
+      Math.max(BUTTON_PREVIEW_LIMITS.borderMin, engineState.intensity / 100)
+    );
+    const blurAmount =
+      BUTTON_PREVIEW_LIMITS.blurBase +
+      Math.round((engineState.textureStrength / 100) * BUTTON_PREVIEW_LIMITS.blurMultiplier);
+    const fontSize = Math.round(BUTTON_PREVIEW_LIMITS.baseFontSize * engineState.controlScale);
+    const apple = BUTTON_PREVIEW_LIMITS.appleLiquidGlass;
+    const liquid = BUTTON_PREVIEW_LIMITS.liquidGlass;
+    const clay = BUTTON_PREVIEW_LIMITS.claymorphism;
+    const neumorphism = BUTTON_PREVIEW_LIMITS.neumorphism;
+    const materialStyles = {
+      appleLiquidGlass: {
+        background: `linear-gradient(140deg, rgba(255,255,255,${apple.highlightBase + glossOpacity * apple.highlightGlossMultiplier}) 0%, rgba(255,255,255,0.08) 35%, rgba(0,0,0,0.25) 100%), radial-gradient(circle at 20% 10%, ${tint.accent}${apple.tintAccentAlpha} 0%, ${tint.accentStrong}${apple.tintAccentStrongAlpha} 60%, #09111a 100%)`,
+        borderColor: `rgba(255,255,255,${apple.borderBase + borderOpacity * apple.borderMultiplier})`,
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,${0.35 + glossOpacity * apple.highlightGlossMultiplier}), inset 0 -1px 0 rgba(0,0,0,0.35), 0 ${apple.shadowOffsetY}px ${apple.shadowBlur}px rgba(0,0,0,${shadowOpacity})`,
+        backdropFilter: `blur(${blurAmount}px) saturate(${apple.saturation}%)`,
+      },
+      liquidGlass: {
+        background: `linear-gradient(180deg, rgba(255,255,255,${liquid.highlightBase + glossOpacity * liquid.highlightGlossMultiplier}), rgba(255,255,255,0.03)), linear-gradient(135deg, ${tint.accentStrong}${liquid.tintAlpha} 0%, #0d1520 100%)`,
+        borderColor: `rgba(255,255,255,${liquid.borderBase + borderOpacity * liquid.borderMultiplier})`,
+        boxShadow: `inset 0 1px 0 rgba(255,255,255,${0.25 + glossOpacity * liquid.highlightGlossMultiplier}), 0 ${liquid.shadowOffsetY}px ${liquid.shadowBlur}px rgba(0,0,0,${shadowOpacity})`,
+        backdropFilter: `blur(${Math.max(4, blurAmount - 2)}px)`,
+      },
+      claymorphism: {
+        background: `linear-gradient(155deg, ${tint.accent}${clay.tintAccentAlpha} 0%, ${tint.accentStrong}${clay.tintAccentStrongAlpha} 100%)`,
+        borderColor: `rgba(255,255,255,${clay.borderBase + borderOpacity * clay.borderMultiplier})`,
+        boxShadow: `inset 6px 6px 14px rgba(255,255,255,${clay.highlightBase + glossOpacity * clay.highlightGlossMultiplier}), inset -8px -8px 14px rgba(0,0,0,0.35), 0 10px 24px rgba(0,0,0,${shadowOpacity})`,
+        backdropFilter: 'none',
+      },
+      neumorphism: {
+        background: `linear-gradient(150deg, #151b24 0%, #0c1017 100%)`,
+        borderColor: `${tint.accent}${neumorphism.borderAlpha}`,
+        boxShadow: `inset 1px 1px 0 rgba(255,255,255,${neumorphism.highlightBase + glossOpacity * neumorphism.highlightGlossMultiplier}), inset -1px -1px 0 rgba(0,0,0,${neumorphism.insetShadowDarkOpacity}), 0 0 ${neumorphism.glowBase + Math.round(engineState.intensity / neumorphism.glowDivider)}px ${tint.accentStrong}${neumorphism.glowAlpha}, 0 ${neumorphism.outerShadowOffsetY}px ${neumorphism.outerShadowBlur}px rgba(0,0,0,${shadowOpacity})`,
+        backdropFilter: 'none',
+      },
+    };
+
+    const selectedMaterial = materialStyles[engineState.buttonMaterial] || materialStyles.appleLiquidGlass;
+    return {
+      width: 'fit-content',
+      minWidth: '180px',
+      height: `${engineState.buttonHeight}px`,
+      borderRadius: `${engineState.buttonRoundness}px`,
+      borderWidth: `${engineState.buttonBorderWidth}px`,
+      borderStyle: 'solid',
+      color: '#f5fbff',
+      fontWeight: 600,
+      fontSize: `${fontSize}px`,
+      padding: '0 22px',
+      letterSpacing: '0.01em',
+      transition: 'all 180ms ease',
+      cursor: 'pointer',
+      ...selectedMaterial,
+    };
+  }, [engineState]);
 
   const fallbackCopy = (text) => {
     const temporaryTextArea = document.createElement('textarea');
@@ -305,6 +450,46 @@ const App = () => {
       <section className='panel'>
         <h2>Schritt 2 · UI-Mixology-Engine</h2>
         <UIMixologyEngine value={engineState} onChange={setEngineState} designLibrary={DESIGN_LIBRARY} />
+      </section>
+
+      <section className='panel'>
+        <h2>Schritt 2.5 · Live Button Studio</h2>
+        <p className='hint'>Wähle Material und Slider in der Mixology-Engine – der Button rendert sofort im gewählten Stil.</p>
+        <div className='button-preview-grid'>
+          <button className='preview-button' style={previewStyles} type='button'>
+            Primary Action
+          </button>
+          <button
+            className='preview-button'
+            style={{
+              ...previewStyles,
+              opacity: 0.82,
+              minWidth: '150px',
+              transform: 'scale(0.96)',
+            }}
+            type='button'
+          >
+            Secondary
+          </button>
+          <button
+            className='preview-button'
+            style={{
+              ...previewStyles,
+              minWidth: `${engineState.buttonHeight}px`,
+              width: `${engineState.buttonHeight}px`,
+              padding: 0,
+              borderRadius: '999px',
+              fontSize: `${Math.max(
+                BUTTON_PREVIEW_LIMITS.iconFontMin,
+                Math.round(BUTTON_PREVIEW_LIMITS.iconFontBase * engineState.controlScale)
+              )}px`,
+            }}
+            aria-label='Favorites'
+            type='button'
+          >
+            ★
+          </button>
+        </div>
       </section>
 
       <section className='panel'>
