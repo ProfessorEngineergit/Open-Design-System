@@ -227,6 +227,20 @@ pre {
   gap: 10px;
 }
 
+.button-preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  padding: 6px 0 2px;
+}
+
+.preview-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 textarea {
   min-height: 124px;
   resize: vertical;

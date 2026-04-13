@@ -70,6 +70,58 @@ const UIMixologyEngine = ({ value, onChange, designLibrary }) => {
         onChange={(event) => updateValue({ textureStrength: Number(event.target.value) })}
       />
 
+      <label>
+        Button-Material
+        <select value={value.buttonMaterial} onChange={(event) => updateValue({ buttonMaterial: event.target.value })}>
+          {Object.entries(designLibrary.materiality).map(([optionValue, optionData]) => (
+            <option key={optionValue} value={optionValue}>
+              {optionData.label}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      <Slider
+        label='Button-Rundheit (px)'
+        value={value.buttonRoundness}
+        min={0}
+        max={40}
+        onChange={(event) => updateValue({ buttonRoundness: Number(event.target.value) })}
+      />
+
+      <Slider
+        label='Button-Höhe (px)'
+        value={value.buttonHeight}
+        min={34}
+        max={72}
+        onChange={(event) => updateValue({ buttonHeight: Number(event.target.value) })}
+      />
+
+      <Dial
+        label='Button-Rand (px)'
+        value={value.buttonBorderWidth}
+        min={0.5}
+        max={4}
+        step={0.1}
+        onChange={(event) => updateValue({ buttonBorderWidth: Number(event.target.value) })}
+      />
+
+      <Slider
+        label='Button-Glanz'
+        value={value.buttonGloss}
+        min={0}
+        max={100}
+        onChange={(event) => updateValue({ buttonGloss: Number(event.target.value) })}
+      />
+
+      <Slider
+        label='Button-Schatten'
+        value={value.buttonShadow}
+        min={0}
+        max={100}
+        onChange={(event) => updateValue({ buttonShadow: Number(event.target.value) })}
+      />
+
       <Dial
         label='Tiefen-Layer'
         value={value.depthLayers}
