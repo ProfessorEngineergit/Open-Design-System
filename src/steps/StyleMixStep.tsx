@@ -57,6 +57,25 @@ export function StyleMixStep({ sel, update }: Props) {
     writeRanked(ranked.filter((x) => x !== id));
   };
 
+  /** Single-click promotion path. Always reliable, no D&D required.
+   *  - Not active → drop into the first empty slot (or append).
+   *  - Active and not yet Lead → promote one tier up.
+   *  - Active and already Lead → remove. */
+  const cycleStyle = (id: string) => {
+    const idx = ranked.indexOf(id);
+    if (idx === -1) {
+      placeInSlot(id, Math.min(ranked.length, 3));
+      return;
+    }
+    if (idx === 0) {
+      removeStyle(id);
+      return;
+    }
+    const next = [...ranked];
+    [next[idx - 1], next[idx]] = [next[idx], next[idx - 1]];
+    writeRanked(next);
+  };
+
   const setWeight = (id: string, w: number) => {
     const next = { ...sel.styleWeights };
     if (w <= 0) delete next[id];
@@ -92,8 +111,8 @@ export function StyleMixStep({ sel, update }: Props) {
     <section>
       <h2 className="step-title">Mix your styles</h2>
       <p className="step-sub muted">
-        Drag a style into a priority slot — Lead drives the look, Supporting adds a voice, Accent is the grace note. The
-        button below morphs live.
+        Click any style on the left to add it. Click it again to promote its priority. Drag also works. Lead drives the
+        look, Supporting adds a voice, Accent is the grace note — the button on the right morphs live.
       </p>
 
       <div className="mix-layout-v2">
@@ -115,15 +134,25 @@ export function StyleMixStep({ sel, update }: Props) {
                       draggable
                       onDragStart={onDragStart(s.id)}
                       onDragEnd={onDragEnd}
-                      onDoubleClick={() => active ? removeStyle(s.id) : placeInSlot(s.id, ranked.length)}
-                      title={active ? 'Double-click to remove' : 'Double-click to add to the next slot'}
+                      onClick={() => cycleStyle(s.id)}
+                      title={
+                        active
+                          ? ranked.indexOf(s.id) === 0
+                            ? 'Lead — click to remove'
+                            : 'Click to promote priority'
+                          : 'Click to add to your stack'
+                      }
                     >
                       <StyleThumb styleId={s.id} compact />
                       <div className="catalog-meta">
                         <strong>{s.name}</strong>
                         <span className="muted catalog-phil">{s.philosophy}</span>
                       </div>
-                      {active && <span className="catalog-on-dot" aria-hidden />}
+                      {active && (
+                        <span className={`catalog-rank tier-${Math.min(ranked.indexOf(s.id), 3)}`} aria-hidden>
+                          {ranked.indexOf(s.id) + 1}
+                        </span>
+                      )}
                     </div>
                   );
                 })}
@@ -135,7 +164,7 @@ export function StyleMixStep({ sel, update }: Props) {
         <aside className="mix-priority">
           <div className="priority-head">
             <h3>Your stack</h3>
-            <span className="faint">Drag styles in. Heavier slots dominate.</span>
+            <span className="faint">Click or drag styles in. Heavier slots dominate.</span>
           </div>
 
           <div className="priority-slots">
