@@ -2,7 +2,7 @@ import { styleById, STYLES } from '../data/styles';
 import { activeStyles, detectConflicts } from './promptEngine';
 import type { OdsSelection } from './state';
 
-/** Pairs that reinforce each other well. */
+/** Styles that tend to look good together. */
 const COMPLEMENTS: Record<string, string[]> = {
   'liquid-glass': ['bento', 'aurora-gradient', 'oled-dark', 'spatial-depth'],
   'aurora-gradient': ['liquid-glass', 'generative-ui', 'frutiger-aero'],
@@ -45,14 +45,14 @@ export function getCoaching(sel: OdsSelection): Coaching {
   const activeIds = active.map((a) => a.style.id);
   const warnings = detectConflicts(sel);
 
-  // Build recommendation set from complements of active styles.
+  // Start from the complements of whatever's already picked.
   const recIds = new Set<string>();
   for (const { style } of active) {
     for (const c of COMPLEMENTS[style.id] ?? []) {
       if (!activeIds.includes(c) && styleById(c)) recIds.add(c);
     }
   }
-  // Drop anything that conflicts with an active style.
+  // Toss anything that clashes with a style already in the mix.
   const filtered = [...recIds].filter((id) => {
     const s = styleById(id)!;
     const clashes = (s.conflictsWith ?? []).some((c) => activeIds.includes(c));
@@ -65,34 +65,34 @@ export function getCoaching(sel: OdsSelection): Coaching {
     return {
       id,
       name: s.name,
-      reason: source ? `Pairs naturally with ${source.style.name}` : 'Works well with your mix',
+      reason: source ? `Goes well with ${source.style.name}` : 'Fits what you have so far',
     };
   });
 
-  let headline = 'Start mixing';
+  let headline = 'Start with a skin';
   let tip =
-    'Pick a "skin" first — Material & Morphism decides how surfaces feel. Hover any card to see a live sample.';
+    'Material & Morphism is where to begin — it sets how your surfaces feel. Hover any card to see it live.';
 
   if (active.length === 1) {
     headline = 'Good start';
-    tip = `You chose ${active[0].style.name}. Now add a Structure style to organize layout, or a Vibe for mood.`;
+    tip = `${active[0].style.name} it is. Add a Structure style for layout, or a Vibe to set the mood.`;
   } else if (active.length >= 2 && active.length <= 4) {
-    headline = 'Nice mix forming';
+    headline = "Now you're getting somewhere";
     tip =
-      'You have a real direction now. Click your favorite again to promote it to Lead — that style drives the rest.';
+      "You've got a real direction going. Click your favorite again to make it the Lead — everything else falls in behind it.";
   } else if (active.length > 4) {
-    headline = 'Lots going on';
+    headline = "That's a lot at once";
     tip =
-      'Five+ styles can fight each other. Keep the Lead clear and the others as quiet supports, or drop a few.';
+      "Five or more styles tend to fight each other. Keep one clear Lead and let the rest stay quiet — or drop a couple.";
   }
 
   if (warnings.length) {
-    headline = 'Tension detected';
-    tip = 'Some choices pull in opposite directions. That can be intentional — just keep one clearly dominant.';
+    headline = 'These pull against each other';
+    tip = "A couple of these go in opposite directions. Totally fine if it's on purpose — just keep one clearly in charge.";
   }
 
   return { headline, tip, recommendations, warnings };
 }
 
-/** Total number of styles available, for progress hints. */
+/** How many styles there are to choose from (the base layer doesn't count). */
 export const TOTAL_STYLES = STYLES.filter((s) => s.category !== 'base-physics').length;

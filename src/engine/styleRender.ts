@@ -1,19 +1,19 @@
 import type { CSSProperties } from 'react';
 
 export interface SampleStyle {
-  /** Background of the little scene behind the sample. */
+  /** The little scene painted behind the sample. */
   scene: CSSProperties;
-  /** The sample surface (card). */
+  /** The sample card itself. */
   surface: CSSProperties;
   /** The sample button. */
   button: CSSProperties;
-  /** Heading text style on the sample. */
+  /** How the heading text looks. */
   heading: CSSProperties;
-  /** Body text style. */
+  /** How the body text looks. */
   body: CSSProperties;
-  /** Optional monospace flag for sample text. */
+  /** Set when the sample should be monospace. */
   mono?: boolean;
-  /** Optional grain amount 0..1 applied to the surface only. */
+  /** A touch of grain (0–1) on the surface only, if the style calls for it. */
   grain?: number;
 }
 
@@ -38,7 +38,7 @@ const base: SampleStyle = {
   body: { color: '#5c574c' },
 };
 
-/** Returns a representative visual spec for a given style id. */
+/** A quick visual spec for one style — just enough to render a believable sample. */
 export function renderStyle(id: string): SampleStyle {
   switch (id) {
     // ── Base physics ──

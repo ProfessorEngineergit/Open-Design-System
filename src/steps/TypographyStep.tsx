@@ -26,13 +26,13 @@ export function TypographyStep({ sel, update }: Props) {
     <section>
       <h2 className="step-title">Pick your typography</h2>
       <p className="step-sub muted">
-        Type carries more personality than any other layer — from neutral grotesques to ultra-wide display faces.
+        Type does more for personality than almost anything else. Pick a pairing, or bring your own below.
       </p>
 
       <div className="cat-block">
         <div className="cat-head">
           <h3>Bring your own fonts</h3>
-          <span className="faint">Optional — upload .woff2 / .ttf / .otf to override a role</span>
+          <span className="faint">Optional — drop in a .woff2 / .ttf / .otf to use your own</span>
         </div>
         <div className="byo-grid">
           {(['heading', 'body'] as FontRole[]).map((role) => {
@@ -93,7 +93,7 @@ export function TypographyStep({ sel, update }: Props) {
                         Ag
                       </span>
                       <span className="type-sample-head" style={{ fontFamily: t.headingStack }}>
-                        Design with intent
+                        Headlines look like this
                       </span>
                       <span className="type-sample-body" style={{ fontFamily: t.bodyStack }}>
                         The quick brown fox jumps over the lazy dog. 0123456789

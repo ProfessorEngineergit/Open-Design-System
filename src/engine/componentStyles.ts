@@ -23,7 +23,7 @@ export interface ComponentTokens {
   toggleTrack: (on: boolean) => CSSProperties;
 }
 
-/** Resolve the full set of component styles from the live design tokens. */
+/** Take the current settings and hand back ready-to-use styles for every component. */
 export function componentTokens(v: VisualParams, active: string[]): ComponentTokens {
   const has = (id: string) => active.includes(id);
   const brutal = has('neo-brutalism');

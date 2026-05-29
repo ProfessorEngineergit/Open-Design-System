@@ -8,10 +8,10 @@ interface Props {
 const SHOWCASE = ['liquid-glass', 'neo-brutalism', 'claymorphism', 'retro-futurism', 'frutiger-aero', 'oled-dark'];
 
 const STEPS = [
-  { n: '01', t: 'Pick a foundation', d: 'Material 3, Fluent or Apple — the physics of light and depth.' },
-  { n: '02', t: 'Mix styles live', d: 'Every style is a real sample. Stack and weight them, coached the whole way.' },
-  { n: '03', t: 'Tune & type', d: 'Fine-tune surfaces in the editor and choose typography from body to display.' },
-  { n: '04', t: 'Get the prompt', d: 'Export one precise, high-signal prompt for any AI coding tool.' },
+  { n: '01', t: 'Pick a foundation', d: 'Material, Fluent or Apple — the base your whole design sits on.' },
+  { n: '02', t: 'Mix styles live', d: "Every style is a real, working sample. Stack a few, and we'll nudge you along the way." },
+  { n: '03', t: 'Tune & type', d: 'Nudge the surfaces and pick your fonts, from body text to big display.' },
+  { n: '04', t: 'Copy the prompt', d: 'One clear prompt you can paste into any AI coding tool.' },
 ];
 
 export function Landing({ onStart, hasProgress }: Props) {
@@ -32,7 +32,7 @@ export function Landing({ onStart, hasProgress }: Props) {
 
       <section className="hero">
         <div className="hero-copy">
-          <div className="hero-eyebrow">For everyone who builds with AI</div>
+          <div className="hero-eyebrow">For anyone building with AI</div>
           <h2 className="hero-title">
             Stop shipping <em>default</em> AI design.
           </h2>
@@ -60,7 +60,7 @@ export function Landing({ onStart, hasProgress }: Props) {
         <div className="section-head">
           <h3>See every style, instantly</h3>
           <p className="muted">
-            Most people can't picture "claymorphism" or "Frutiger Aero". So we show you — live, before you choose.
+            Nobody can picture "claymorphism" or "Frutiger Aero" from the name alone. So we just show you, before you pick.
           </p>
         </div>
         <div className="showcase-grid">
@@ -75,7 +75,7 @@ export function Landing({ onStart, hasProgress }: Props) {
       <section className="how">
         <div className="section-head">
           <h3>How it works</h3>
-          <p className="muted">Four steps from blank page to a prompt that actually carries your taste.</p>
+          <p className="muted">Four steps from blank page to a prompt that actually sounds like you.</p>
         </div>
         <div className="how-grid">
           {STEPS.map((s) => (
@@ -89,7 +89,7 @@ export function Landing({ onStart, hasProgress }: Props) {
       </section>
 
       <section className="cta-band">
-        <h3>Ready to design with intent?</h3>
+        <h3>Ready to make something that isn't default?</h3>
         <button className="primary-btn hero-btn" onClick={onStart}>
           {hasProgress ? 'Resume' : 'Open the editor'}
         </button>

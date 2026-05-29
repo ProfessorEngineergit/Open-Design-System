@@ -5,7 +5,7 @@ interface SliderProps {
   max: number;
   step?: number;
   unit?: string;
-  /** Render a hue gradient track (for accent hue). */
+  /** Show a rainbow track instead of a plain one — for the hue slider. */
   hue?: boolean;
   onChange: (v: number) => void;
 }

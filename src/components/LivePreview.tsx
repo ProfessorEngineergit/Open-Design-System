@@ -9,7 +9,7 @@ interface Props {
   bodyFont?: string;
 }
 
-/** A sample card on a real scene; reflects the current visual tokens live. */
+/** A sample card on a real backdrop, wired up to the live tokens. */
 export function LivePreview({ v, activeStyleIds, headingFont, bodyFont }: Props) {
   const has = (id: string) => activeStyleIds.includes(id);
 
@@ -84,7 +84,7 @@ export function LivePreview({ v, activeStyleIds, headingFont, bodyFont }: Props)
         </div>
         <h3 style={{ fontSize: 22, position: 'relative', fontFamily: headingFont }}>Your component</h3>
         <p style={{ color: '#3a3630', margin: '8px 0 16px', position: 'relative', fontFamily: bodyFont }}>
-          Every slider rewrites these tokens instantly — on a real backdrop, so glass actually refracts.
+          Move a slider and these tokens update on the spot — on a real backdrop, so the glass actually bends light.
         </p>
         <div className="row" style={{ alignItems: 'center', position: 'relative' }}>
           <button style={btnStyle}>Primary action</button>

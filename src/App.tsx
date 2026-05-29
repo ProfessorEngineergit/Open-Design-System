@@ -26,7 +26,7 @@ function loadSelection(): OdsSelection {
       };
     }
   } catch {
-    /* ignore corrupt storage */
+    /* storage was garbled — just start fresh */
   }
   return INITIAL_SELECTION;
 }

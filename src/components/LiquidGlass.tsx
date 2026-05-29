@@ -39,5 +39,5 @@ export function GlassFilter({ id, scale, frequency = 0.013, blur = 0.7 }: GlassF
   );
 }
 
-/** Maps the 0-100 refraction param to a usable feDisplacementMap scale. */
+/** Turn the 0–100 refraction slider into a displacement scale that looks right. */
 export const refractionScale = (refraction: number) => Math.round(refraction * 0.7);

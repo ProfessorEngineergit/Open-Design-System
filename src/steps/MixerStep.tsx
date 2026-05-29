@@ -23,7 +23,7 @@ export function MixerStep({ sel, update }: Props) {
   return (
     <section>
       <h2 className="step-title">Fine-tune the look</h2>
-      <p className="step-sub muted">Drag to shape the surface. The preview and the generated tokens update live.</p>
+      <p className="step-sub muted">Drag the sliders to shape the surface. The preview and the tokens keep up as you go.</p>
 
       <div className="mixer-layout">
         <div className="mixer-controls panel">

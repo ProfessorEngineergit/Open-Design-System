@@ -9,14 +9,14 @@ interface Props {
   sel: OdsSelection;
 }
 
-/** Pull a representative accent color out of a rendered style's button. */
+/** Grab a representative accent color from a style's button. */
 function accentFrom(buttonStyle: CSSProperties): string {
   const bg = buttonStyle.background ?? buttonStyle.backgroundColor;
   return typeof bg === 'string' ? bg : '#cc785c';
 }
 
-/** Live preview that renders the actual lead style (not a generic clay
- *  fallback) and accents it with the supporting + accent style colors. */
+/** Live preview that renders the real lead style — not some generic
+ *  fallback — and dots in the supporting + accent colors beside it. */
 export function MixPreview({ sel }: Props) {
   const ranked = useMemo(() => activeStyles(sel), [sel]);
   const leadId = ranked[0]?.style.id ?? sel.basePhysics ?? 'apple-hig';

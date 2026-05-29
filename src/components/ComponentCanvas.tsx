@@ -33,7 +33,7 @@ const UNITLESS = new Set([
   'order',
 ]);
 
-/** Turn a React style object into readable CSS for the inspector. */
+/** Turn a React style object into CSS you can actually read. */
 function cssText(style: CSSProperties): string {
   return Object.entries(style)
     .filter(([, val]) => val !== undefined && val !== '')
@@ -72,16 +72,16 @@ export function ComponentCanvas({ sel }: Props) {
   const surfaceKind = t.brutal ? 'Neo-brutalist' : t.clay ? 'Claymorphic' : t.glass ? 'Liquid glass' : 'Soft material';
 
   const nodes: Record<NodeId, NodeMeta> = {
-    primary: { label: 'Primary button', hint: 'Accent-filled call to action.', style: t.primaryBtn },
-    secondary: { label: 'Secondary button', hint: 'Quiet, bordered alternative.', style: t.secondaryBtn },
-    ghost: { label: 'Ghost button', hint: 'Text-only, lowest emphasis.', style: t.ghostBtn },
-    input: { label: 'Text input', hint: 'Field with focus affordance.', style: t.input },
-    toggle: { label: 'Toggle', hint: 'On/off switch — click to test.', style: t.toggleTrack(toggleOn) },
-    badge: { label: 'Badge', hint: 'Compact status pill.', style: t.badge },
-    card: { label: 'Stat card', hint: `${surfaceKind} surface.`, style: t.surface },
-    nav: { label: 'Nav bar', hint: `${surfaceKind} surface, horizontal.`, style: t.surface },
-    list: { label: 'List row', hint: `${surfaceKind} surface with avatar.`, style: t.surface },
-    modal: { label: 'Dialog', hint: `${surfaceKind} surface, elevated.`, style: t.surface },
+    primary: { label: 'Primary button', hint: 'Your main call to action.', style: t.primaryBtn },
+    secondary: { label: 'Secondary button', hint: 'A quieter, bordered option.', style: t.secondaryBtn },
+    ghost: { label: 'Ghost button', hint: 'Text only — the lightest touch.', style: t.ghostBtn },
+    input: { label: 'Text input', hint: 'A text field, focus state and all.', style: t.input },
+    toggle: { label: 'Toggle', hint: 'On/off switch — give it a click.', style: t.toggleTrack(toggleOn) },
+    badge: { label: 'Badge', hint: 'A little status pill.', style: t.badge },
+    card: { label: 'Stat card', hint: `A ${surfaceKind.toLowerCase()} surface.`, style: t.surface },
+    nav: { label: 'Nav bar', hint: `A ${surfaceKind.toLowerCase()} bar across the top.`, style: t.surface },
+    list: { label: 'List row', hint: `A ${surfaceKind.toLowerCase()} row with an avatar.`, style: t.surface },
+    modal: { label: 'Dialog', hint: `A ${surfaceKind.toLowerCase()} surface, lifted up.`, style: t.surface },
   };
 
   const meta = nodes[selected];
@@ -259,7 +259,7 @@ export function ComponentCanvas({ sel }: Props) {
         <pre className="inspector-css">{cssText(meta.style)}</pre>
 
         <p className="faint inspector-foot">
-          Click any element on the canvas to inspect it. Values are driven live by the Mixer.
+          Click anything on the canvas to inspect it. These values come straight from your Mixer settings.
         </p>
       </aside>
     </div>
