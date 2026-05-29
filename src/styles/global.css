@@ -1,0 +1,146 @@
+:root {
+  /* Anthropic-light palette: warm paper, clay accent, ink text */
+  --bg: #efece3;
+  --bg-warm: #e9e5da;
+  --surface: #fbf9f4;
+  --surface-2: #f4f1e9;
+  --panel: #fbf9f4;
+  --panel-strong: #ffffff;
+  --border: rgba(28, 25, 20, 0.12);
+  --border-strong: rgba(28, 25, 20, 0.22);
+
+  --text: #1a1814;
+  --text-dim: #5c574c;
+  --text-faint: #8a8475;
+
+  --accent: #cc785c; /* clay */
+  --accent-deep: #b5603e;
+  --accent-soft: #ecd9cf;
+  --accent-tint: rgba(204, 120, 92, 0.1);
+
+  --ok: #5b8c6e;
+  --warn: #b5803f;
+
+  --radius: 12px;
+  --radius-lg: 18px;
+  --maxw: 1240px;
+
+  --shadow-sm: 0 1px 2px rgba(28, 25, 20, 0.06), 0 2px 6px rgba(28, 25, 20, 0.05);
+  --shadow-md: 0 4px 12px rgba(28, 25, 20, 0.08), 0 12px 30px rgba(28, 25, 20, 0.06);
+  --shadow-lg: 0 12px 28px rgba(28, 25, 20, 0.1), 0 30px 60px rgba(28, 25, 20, 0.1);
+
+  --font-display: 'Fraunces', 'Tiempos', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
+  font-family: var(--font-body);
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.55;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+a {
+  color: var(--accent-deep);
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+/* App shell */
+.app-shell {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 24px 24px 96px;
+  min-height: 100%;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.brand-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--accent);
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+.brand-mark::after {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  border: 2px solid var(--surface);
+}
+.brand h1 {
+  font-size: 19px;
+  font-weight: 600;
+}
+.brand small {
+  color: var(--text-faint);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+/* helpers */
+.muted {
+  color: var(--text-dim);
+}
+.faint {
+  color: var(--text-faint);
+}
+.row {
+  display: flex;
+  gap: 12px;
+}
+.grow {
+  flex: 1;
+}
+.serif {
+  font-family: var(--font-display);
+}
