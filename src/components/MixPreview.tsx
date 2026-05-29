@@ -23,7 +23,10 @@ export function MixPreview({ sel }: Props) {
   const headingFont = fontStackForRole(sel, 'heading', type?.headingStack ?? 'var(--font-display)');
   const bodyFont = fontStackForRole(sel, 'body', type?.bodyStack ?? 'var(--font-body)');
 
-  const surfaceKind = t.brutal ? 'Neo-brutalist' : t.clay ? 'Claymorphic' : t.glass ? 'Liquid glass' : 'Soft material';
+  const ranked = activeStyles(sel);
+  const dominantName = ranked[0]?.style.name;
+  const surfaceKind = dominantName
+    ?? (t.brutal ? 'Neo-brutalist' : t.clay ? 'Claymorphic' : t.glass ? 'Liquid glass' : 'Soft material');
 
   return (
     <div className="mix-preview-stage">

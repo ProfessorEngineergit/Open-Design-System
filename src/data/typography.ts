@@ -203,6 +203,154 @@ export const TYPE_SYSTEMS: TypeSystem[] = [
     promptFragment:
       'Typography: raw default system faces (Times New Roman, Courier, Arial) used deliberately as an anti-design statement — pairs with neo-brutalism. No webfonts; embrace the browser default look.',
   },
+
+  // ── Grotesque (extended) ──
+  {
+    id: 'sharp-tech',
+    name: 'Sharp Tech',
+    category: 'grotesque',
+    headingStack: "'Inter Tight', 'Inter', system-ui, sans-serif",
+    bodyStack: "'Inter', system-ui, sans-serif",
+    character: 'Tight, optical-sized grotesque — the Söhne/Geist feel.',
+    vibes: ['technical', 'modern', 'pro-saas'],
+    promptFragment:
+      'Typography: a tight, optically-sized grotesque (Inter Tight for headings, Inter for body) with -0.02em tracking on display sizes. Söhne/Geist energy — pairs with Linear-Pro and dim dark surfaces.',
+  },
+  {
+    id: 'designer-default',
+    name: 'Designer Default',
+    category: 'grotesque',
+    headingStack: "'Outfit', 'Aeonik', 'Inter', sans-serif",
+    bodyStack: "'Outfit', system-ui, sans-serif",
+    character: 'The unofficial 2024 designer-portfolio default.',
+    vibes: ['modern', 'designer', 'product'],
+    promptFragment:
+      'Typography: a clean modern designer-default grotesque (Outfit, Aeonik-feel) used at both heading and body weights — pairs with bento layouts and quiet SaaS aesthetics.',
+  },
+
+  // ── Geometric (extended) ──
+  {
+    id: 'soft-modern',
+    name: 'Soft Modern',
+    category: 'geometric',
+    headingStack: "'Sora', 'Cabinet Grotesk', 'Inter', sans-serif",
+    bodyStack: "'Sora', system-ui, sans-serif",
+    character: 'Geometric with slightly softened terminals.',
+    vibes: ['friendly', 'modern', 'studio'],
+    promptFragment:
+      'Typography: a modern geometric sans with softly humanist terminals (Sora / Cabinet Grotesk) used throughout. Warm without being cute.',
+  },
+
+  // ── Humanist (extended) ──
+  {
+    id: 'friendly-rounded',
+    name: 'Friendly Rounded',
+    category: 'humanist',
+    headingStack: "'Quicksand', 'Nunito', sans-serif",
+    bodyStack: "'Nunito', system-ui, sans-serif",
+    character: 'Rounded, soft, very approachable.',
+    vibes: ['soft', 'consumer', 'kid-friendly'],
+    promptFragment:
+      'Typography: thoroughly rounded geometric humanist (Quicksand / Nunito) — soft terminals, generous counters, consumer-friendly. Pairs with claymorphism and cute palettes.',
+  },
+
+  // ── Serif editorial (extended) ──
+  {
+    id: 'editorial-italian',
+    name: 'Editorial Italian',
+    category: 'serif-editorial',
+    headingStack: "'Fraunces', 'Tiempos Headline', Georgia, serif",
+    bodyStack: "'Source Serif 4', 'Tiempos Text', Georgia, serif",
+    character: 'Warm contemporary serif with strong personality.',
+    vibes: ['editorial', 'warm', 'sophisticated'],
+    promptFragment:
+      'Typography: a warm contemporary serif (Fraunces / Tiempos Headline) for headlines with a comfortable text serif (Source Serif 4) for body. Italian editorial sophistication — pairs with newsroom and editorial layouts.',
+  },
+  {
+    id: 'academic-library',
+    name: 'Academic Library',
+    category: 'serif-editorial',
+    headingStack: "'EB Garamond', 'Garamond', Georgia, serif",
+    bodyStack: "'EB Garamond', Georgia, serif",
+    character: 'Renaissance Garamond — bookish, calm, scholarly.',
+    vibes: ['scholarly', 'bookish', 'calm'],
+    promptFragment:
+      'Typography: EB Garamond throughout — Renaissance proportions, calm reading rhythm, scholarly mood. Pairs with dark-academia and quiet content sites.',
+  },
+
+  // ── Slab (extended) ──
+  {
+    id: 'vinyl-display',
+    name: 'Vinyl Sleeve',
+    category: 'slab',
+    headingStack: "'Anton', 'Saira Condensed', sans-serif",
+    bodyStack: "'IBM Plex Sans', system-ui, sans-serif",
+    character: 'Bold condensed display over a quiet body sans.',
+    vibes: ['music', 'poster', 'bold'],
+    promptFragment:
+      'Typography: a bold condensed display face (Anton / Saira Condensed) for hero headlines like a record sleeve, paired with IBM Plex Sans for body. Strong poster energy.',
+  },
+
+  // ── Mono (extended) ──
+  {
+    id: 'brutalist-mono',
+    name: 'Brutalist Mono',
+    category: 'mono',
+    headingStack: "'IBM Plex Mono', 'JetBrains Mono', monospace",
+    bodyStack: "'IBM Plex Mono', monospace",
+    character: 'Monospace everywhere as a design statement.',
+    vibes: ['brutalist', 'technical', 'editorial'],
+    promptFragment:
+      'Typography: IBM Plex Mono / JetBrains Mono used for absolutely everything — headings, body, labels, captions. A deliberately fixed-width statement that pairs with neo-brutalism and anti-design.',
+  },
+
+  // ── Display & Wide (extended) ──
+  {
+    id: 'display-power',
+    name: 'Display Power',
+    category: 'display-wide',
+    headingStack: "'Archivo Expanded', 'Anton', sans-serif",
+    bodyStack: "'Inter', system-ui, sans-serif",
+    character: 'Magazine-scale hero type at marketing weight.',
+    vibes: ['marketing', 'cinematic', 'bold'],
+    promptFragment:
+      'Typography: huge magazine-scale display type (Archivo Expanded / Anton) for the hero, set with negative tracking and tight leading, dropped over a calm Inter body. Marketing-power energy.',
+  },
+  {
+    id: 'architectural-din',
+    name: 'Architectural DIN',
+    category: 'display-wide',
+    headingStack: "'Saira', 'DIN Next', sans-serif",
+    bodyStack: "'Inter', system-ui, sans-serif",
+    character: 'Mechanical industrial precision.',
+    vibes: ['technical', 'architectural', 'precise'],
+    promptFragment:
+      'Typography: an industrial DIN-style face (Saira) for labels and headings, paired with Inter body. Mechanical precision — pairs with architectural blueprint and industrial UI.',
+  },
+
+  // ── Expressive (extended) ──
+  {
+    id: 'handwritten-warm',
+    name: 'Handwritten Warm',
+    category: 'expressive',
+    headingStack: "'Caveat', 'Kalam', cursive",
+    bodyStack: "'Inter', system-ui, sans-serif",
+    character: 'Handwritten accent over a calm sans body.',
+    vibes: ['personal', 'warm', 'craft'],
+    promptFragment:
+      'Typography: a warm handwritten script (Caveat / Kalam) used sparingly for headings and accents, paired with a calm Inter body. Personal, hand-made feel — pairs with hand-drawn and wabi-sabi.',
+  },
+  {
+    id: 'magazine-classic',
+    name: 'Magazine Classic',
+    category: 'expressive',
+    headingStack: "'Playfair Display', 'Didot', serif",
+    bodyStack: "'Inter', system-ui, sans-serif",
+    character: 'Classic Didone heading, modern grotesque body.',
+    vibes: ['editorial', 'fashion', 'classic'],
+    promptFragment:
+      'Typography: a classic Didone headline (Playfair Display / Didot) over a modern Inter body — the timeless magazine pairing. Pairs strongly with newsroom-editorial and dark-academia.',
+  },
 ];
 
 export const typeSystemsByCategory = (cat: TypeCategory) =>

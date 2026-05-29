@@ -31,6 +31,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          # Update this if the GitHub repo is renamed (e.g. /Looksmith/).
           VITE_BASE: /Open-Design-System/
 
       - name: Upload Pages artifact

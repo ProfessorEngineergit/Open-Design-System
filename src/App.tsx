@@ -65,8 +65,8 @@ export default function App() {
           <div className="brand-mark" />
         </button>
         <div className="grow">
-          <h1>Open Design System</h1>
-          <small>Mix styles · generate the prompt</small>
+          <h1>Looksmith</h1>
+          <small>Forge a look · ship the prompt</small>
         </div>
         <button className="text-btn" onClick={() => setView('landing')}>
           Home

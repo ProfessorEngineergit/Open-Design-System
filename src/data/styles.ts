@@ -339,6 +339,447 @@ export const STYLES: DesignStyle[] = [
     promptFragment:
       'Drive feedback through microinteractions: buttons morph into checkmarks on success, errors trigger a subtle shake, drag-and-drop uses spring physics, and there are no classic loading bars — every state is a small fluid motion.',
   },
+
+  // ─────────────────────────── Morphism (extended) ───────────────────────────
+  {
+    id: 'glassmorphism-classic',
+    name: 'Glassmorphism (2020)',
+    category: 'morphism',
+    philosophy: 'The original frosted-glass trend — flat, no refraction.',
+    markers: [
+      'Heavy backdrop blur on light/colored backgrounds',
+      'Visible hairline white border',
+      '50–70% white tint on the surface',
+      'Soft drop shadow underneath',
+    ],
+    cssHints: [
+      'backdrop-filter: blur(24px) saturate(140%)',
+      'background: rgba(255,255,255,0.55)',
+      'border: 1px solid rgba(255,255,255,0.6)',
+    ],
+    promptFragment:
+      'Use classic 2020-era glassmorphism: heavy backdrop blur on a colorful background, a roughly 55% white surface tint with a clean hairline white border, and a single soft shadow. No optical refraction — this is the flat, accessible version of glass.',
+    conflictsWith: ['neo-brutalism'],
+  },
+  {
+    id: 'iridescent-foil',
+    name: 'Iridescent / Holographic Foil',
+    category: 'morphism',
+    philosophy: 'Chromatic shimmer like a hologram sticker or oil slick.',
+    markers: [
+      'Conic-gradient rainbow on accent surfaces',
+      'Hue rotation on hover',
+      'Mirror-like specular highlight',
+      'Subtle grain so the foil reads physical',
+    ],
+    motion: 'Slow continuous hue-rotate; cursor parallax tilts the highlight.',
+    cssHints: [
+      'background: conic-gradient with smooth-stop pastels',
+      'mix-blend-mode: overlay for the shine',
+      'filter: hue-rotate animated on scroll',
+    ],
+    promptFragment:
+      'Treat accent surfaces as iridescent foil: a conic-gradient pastel rainbow with a mirror-like specular highlight that parallaxes on cursor, slow hue-rotation in motion, and a faint grain so the shimmer reads physical rather than synthetic.',
+    conflictsWith: ['neo-brutalism', 'ultra-minimalism'],
+  },
+  {
+    id: 'risograph',
+    name: 'Risograph Print',
+    category: 'morphism',
+    philosophy: 'Two-color print process — overlapping inks, paper grain.',
+    markers: [
+      'Limited 2–3 color palette (fluorescent pink, blue, yellow)',
+      'Visible overprint where colors stack',
+      'Paper texture under everything',
+      'Slight misregistration as a feature',
+    ],
+    cssHints: [
+      'mix-blend-mode: multiply for layered colors',
+      'Subtle paper-grain SVG overlay',
+      '~1–2px intentional color offset on hover',
+    ],
+    promptFragment:
+      'Use a Risograph print aesthetic: a limited 2–3 ink palette (fluorescent pink, sky blue, sunshine yellow) layered via mix-blend-mode multiply, paper grain under everything, and tiny intentional misregistration so type and edges feel printed, not pixel-perfect.',
+    conflictsWith: ['liquid-glass', 'apple-hig'],
+  },
+  {
+    id: 'plywood-material',
+    name: 'Plywood & Paper',
+    category: 'morphism',
+    philosophy: 'Honest natural materials — wood, paper, fabric.',
+    markers: [
+      'Real wood-grain or paper texture on cards',
+      'Soft shadow under physical-feeling layers',
+      'Earthy palette (oak, cream, charcoal)',
+      'Sans body, slab heading',
+    ],
+    cssHints: [
+      'CSS noise + sepia overlays for paper',
+      'Repeating gradient micro-stripes for wood grain',
+      'Soft umbral shadow (no neon)',
+    ],
+    promptFragment:
+      'Surfaces look like honest natural materials — plywood, cream cardstock, raw linen. Use grain textures, soft umbral shadows, an earthy palette and slab-serif headings. The interface should feel like an object you could hold.',
+  },
+
+  // ─────────────────────────── Structure (extended) ───────────────────────────
+  {
+    id: 'swiss-modernism',
+    name: 'Swiss Modernism',
+    category: 'structure',
+    philosophy: 'Grid, objectivity, asymmetric balance — the school of Müller-Brockmann.',
+    markers: [
+      'Strict modular grid (8 or 12 column)',
+      'Left-aligned, ragged-right text',
+      'Hairline rules between sections',
+      'Single neo-grotesque, two weights max',
+    ],
+    cssHints: [
+      'CSS grid with explicit named columns',
+      '1px solid divider rules',
+      'Helvetica/Inter only',
+    ],
+    promptFragment:
+      'Adopt Swiss Modernism: a strict modular grid with hairline rules between sections, left-aligned ragged-right text, a single neo-grotesque (Helvetica/Inter) in two weights, and asymmetric balance instead of centered symmetry. Maximum objectivity, zero ornament.',
+  },
+  {
+    id: 'newsroom-editorial',
+    name: 'Newsroom Editorial',
+    category: 'structure',
+    philosophy: 'Dense columns, hierarchy by typography — NYT, FT, Bloomberg.',
+    markers: [
+      '2–4 columns of body text',
+      'Bold serif headlines with kicker labels',
+      'Pull quotes set in italic display serif',
+      'Byline + timestamp metadata',
+    ],
+    cssHints: [
+      'CSS columns or grid for newsprint flow',
+      'Drop caps via :first-letter',
+      'Mixed serif headline + sans body',
+    ],
+    promptFragment:
+      'Lay out the page like a newsroom: 2–4 columns of body text, bold serif headlines with kicker labels, italic pull quotes that break the grid, drop caps on long articles, and visible byline + timestamp metadata. Hierarchy is achieved by type and rule lines, not boxes.',
+  },
+  {
+    id: 'maximalism',
+    name: 'Digital Maximalism',
+    category: 'structure',
+    philosophy: 'Density and layering — anti-minimal, anti-grid, intentional chaos.',
+    markers: [
+      'Overlapping layers and tilted cards',
+      'Mix of typefaces and weights',
+      'Visible scroll cues and stickers',
+      'Bright clashing colors',
+    ],
+    cssHints: [
+      'transform: rotate(-3deg) on cards',
+      'z-index choreography',
+      'Multiple background images and gradients stacked',
+    ],
+    promptFragment:
+      'Embrace digital maximalism: overlapping tilted cards, multiple typefaces fighting for attention, stickers and scroll cues stacked on top of content, bright clashing colors. Intentional chaos — every screen should feel hand-collaged.',
+    conflictsWith: ['ultra-minimalism', 'swiss-modernism'],
+  },
+  {
+    id: 'dieter-rams',
+    name: 'Quiet Design (Rams)',
+    category: 'structure',
+    philosophy: 'Less, but better — Braun-era restraint applied to UI.',
+    markers: [
+      'Neutral grey palette + a single bright accent',
+      'Tight hairline borders, no shadows',
+      'Aligned, technical labels in small caps',
+      'No decorative elements',
+    ],
+    cssHints: [
+      'Greyscale tokens with one accent (often orange or red)',
+      'No box-shadow anywhere',
+      'Letter-spacing on uppercase labels',
+    ],
+    promptFragment:
+      'Apply Dieter Rams "less but better" restraint: a neutral grey palette with a single bright functional accent, tight hairline borders, zero decorative shadows, small-caps labels with positive letter-spacing. Every element earns its place or is removed.',
+  },
+  {
+    id: 'linear-pro',
+    name: 'Linear / Pro SaaS',
+    category: 'structure',
+    philosophy: 'Quiet productivity — keyboard-first, dim gradients, tight type.',
+    markers: [
+      'Near-black surfaces with subtle violet/blue gradient bloom',
+      'Compact rows with shortcut hints',
+      'Tight Inter Tight / Söhne-feel grotesque',
+      'Hairline dividers, no heavy shadows',
+    ],
+    cssHints: [
+      'Background: very dark with soft radial gradient',
+      'border-color: rgba(255,255,255,0.06)',
+      'Cmd+K shortcut chips next to actions',
+    ],
+    promptFragment:
+      'Build a Linear / pro-SaaS feel: near-black surfaces with a subtle blue-violet gradient bloom, tight grotesque typography, compact rows with visible Cmd+K shortcut chips, hairline dividers and no heavy shadows. Keyboard-first, quietly fast.',
+  },
+
+  // ─────────────────────────── Vibe (extended) ───────────────────────────
+  {
+    id: 'vaporwave',
+    name: 'Vaporwave / Synthwave',
+    category: 'vibe',
+    philosophy: 'Sunset gradient + neon grid — VHS nostalgia for a future that never was.',
+    markers: [
+      'Magenta → cyan gradients',
+      'Perspective grid floor',
+      'Chromatic aberration on type',
+      'CRT scanline overlay',
+    ],
+    cssHints: [
+      'linear-gradient(180deg,#ff2bd0,#2bf5ff)',
+      'CSS perspective transform on grid background',
+      'Subtle scanline via repeating-linear-gradient',
+    ],
+    promptFragment:
+      'Channel vaporwave/synthwave: sunset magenta-to-cyan gradients, a perspective neon grid floor, slight chromatic aberration on headlines, and a faint CRT scanline overlay. VHS nostalgia for a future that never arrived.',
+    conflictsWith: ['ultra-minimalism', 'swiss-modernism'],
+  },
+  {
+    id: 'cyberpunk-neon',
+    name: 'Cyberpunk Neon',
+    category: 'vibe',
+    philosophy: 'Hi-tech low-life — neon rain on black glass.',
+    markers: [
+      'True black backgrounds',
+      'Hot magenta + electric cyan accents',
+      'Hard angular cuts on panels',
+      'Glitchy hover states',
+    ],
+    cssHints: [
+      'clip-path: polygon for angled panels',
+      'box-shadow neon glow on focus',
+      'Monospace metadata labels',
+    ],
+    promptFragment:
+      'Build a cyberpunk neon interface: true black backgrounds, hot magenta and electric cyan accents, hard angular clipped panels, neon glow on focus, monospace metadata labels and glitchy hover states. Hi-tech low-life energy.',
+    conflictsWith: ['cutealism', 'frutiger-aero'],
+  },
+  {
+    id: 'glitch',
+    name: 'Glitch / Datamosh',
+    category: 'vibe',
+    philosophy: 'Broken signal as aesthetic — RGB split, datamosh, dropped frames.',
+    markers: [
+      'RGB-split text shadows',
+      'Sliced horizontal displacement bands',
+      'Pixel-sorted hero images',
+      'Random hover offset',
+    ],
+    cssHints: [
+      'text-shadow with offset cyan + magenta layers',
+      'SVG feDisplacementMap with high turbulence',
+      'JS-driven random transform on hover',
+    ],
+    promptFragment:
+      'Use glitch / datamosh aesthetics: RGB-split text shadows (cyan + magenta offset), horizontal displacement bands across hero images, pixel-sorted artwork and randomized micro-offsets on hover. Broken signal as a stylistic choice.',
+  },
+  {
+    id: 'dark-academia',
+    name: 'Dark Academia',
+    category: 'vibe',
+    philosophy: 'Library-by-candlelight — sepia, leather, classical serif.',
+    markers: [
+      'Sepia / parchment palette',
+      'Classical serif (Caslon, Garamond)',
+      'Warm gold accent',
+      'Deep umbral shadows',
+    ],
+    cssHints: [
+      'Background: #f3ead2 with paper grain',
+      'Serif-only typography',
+      'Gold accent #b58a3a',
+    ],
+    promptFragment:
+      'Adopt a dark academia mood: sepia and parchment backgrounds, classical serif typography (Caslon / Garamond), warm gold accents, deep umbral shadows and parchment grain. A research library by candlelight rendered as an app.',
+    conflictsWith: ['cyberpunk-neon', 'vaporwave'],
+  },
+  {
+    id: 'solarpunk',
+    name: 'Solarpunk',
+    category: 'vibe',
+    philosophy: 'Optimistic green-tech utopia — leaves + circuits.',
+    markers: [
+      'Verdant greens with copper accents',
+      'Botanical illustrations as ornaments',
+      'Soft organic curves',
+      'Art-Nouveau-derived borders',
+    ],
+    cssHints: [
+      'Green palette: #2f6a4a, #7fb88f, copper #b87333',
+      'SVG botanical line-art accents',
+      'Generous border-radius on cards',
+    ],
+    promptFragment:
+      'Use a solarpunk aesthetic: verdant green and copper palette, botanical line-art ornaments, soft organic curves, Art-Nouveau-derived border decoration. Optimistic green-tech utopia rendered as UI.',
+  },
+  {
+    id: 'wabi-sabi',
+    name: 'Wabi-Sabi',
+    category: 'vibe',
+    philosophy: 'Beauty in imperfection — asymmetric, natural, weathered.',
+    markers: [
+      'Asymmetric compositions',
+      'Earthy clay / stone palette',
+      'Hand-painted ink accents',
+      'Generous negative space',
+    ],
+    cssHints: [
+      'Off-grid placement (intentional misalignment)',
+      'SVG brush-stroke dividers',
+      'Cream backgrounds with subtle texture',
+    ],
+    promptFragment:
+      'Embrace wabi-sabi: asymmetric compositions, an earthy clay-and-stone palette, hand-painted ink accents and brush-stroke dividers, generous negative space. Beauty through imperfection and weathered restraint.',
+    conflictsWith: ['neo-brutalism', 'cyberpunk-neon'],
+  },
+  {
+    id: 'memphis-80s',
+    name: 'Memphis 80s',
+    category: 'vibe',
+    philosophy: 'Primary shapes, squiggles, and confetti — the Sottsass legacy.',
+    markers: [
+      'Primary colors + black + white',
+      'Squiggle and zigzag patterns',
+      'Geometric shape stickers',
+      'Black-and-white grid backgrounds',
+    ],
+    cssHints: [
+      'SVG squiggle decorations layered on cards',
+      'Bold geometric shape cutouts',
+      'Pattern fills via background-image',
+    ],
+    promptFragment:
+      'Channel Memphis Group / Sottsass 80s: primary colors plus black and white, squiggle and zigzag patterns, geometric shape stickers (triangle, dot, slash), and grid pattern fills. Playful postmodern energy.',
+    conflictsWith: ['ultra-minimalism', 'dieter-rams'],
+  },
+  {
+    id: 'anti-design',
+    name: 'Anti-Design',
+    category: 'vibe',
+    philosophy: 'Intentionally crude — mismatched type, raw HTML, broken hierarchy.',
+    markers: [
+      'Mismatched typefaces in a single screen',
+      'Default browser styling visible',
+      'Unbalanced margins',
+      'No grid, no shadows',
+    ],
+    cssHints: [
+      'Browser defaults left in place where possible',
+      'Intentionally clashing serif + sans + mono',
+      'Asymmetric whitespace',
+    ],
+    promptFragment:
+      'Adopt anti-design: deliberately mismatched typefaces in the same view, default browser styling left visible, broken hierarchy, asymmetric margins. The crudeness is the statement — pairs with neo-brutalism but pushes further.',
+    conflictsWith: ['swiss-modernism', 'dieter-rams', 'apple-hig'],
+  },
+  {
+    id: 'pixel-art',
+    name: 'Pixel Art / 8-bit',
+    category: 'vibe',
+    philosophy: 'Crunchy low-res retro game UI.',
+    markers: [
+      'Image-rendering: pixelated',
+      'Limited 8-bit palette',
+      'Pixel-perfect borders, no anti-aliasing',
+      'CRT scanline overlay (optional)',
+    ],
+    cssHints: [
+      'image-rendering: pixelated',
+      'border-image with a tiled 8-bit corner',
+      'box-shadow: 4px 4px 0 0 in primary palette',
+    ],
+    promptFragment:
+      'Render the interface as 8-bit pixel art: image-rendering pixelated everywhere, a limited NES/SNES-era palette, pixel-perfect blocky borders, optional CRT scanline overlay. UI as retro game.',
+  },
+  {
+    id: 'hand-drawn',
+    name: 'Hand-drawn / Sketchy',
+    category: 'vibe',
+    philosophy: 'Sketchbook energy — Excalidraw, low-fidelity charm.',
+    markers: [
+      'Wobbly hand-drawn borders',
+      'Marker / pencil texture',
+      'Cream paper background',
+      'Casual labeled annotations',
+    ],
+    cssHints: [
+      'SVG filters: feTurbulence for jitter on edges',
+      'Subtle paper texture background',
+      "Rounded sans like Comic Neue or Caveat for labels",
+    ],
+    promptFragment:
+      'Use a hand-drawn / Excalidraw sketchbook aesthetic: wobbly SVG-filtered borders, marker textures, a cream paper background, casual labeled annotations in a friendly handwritten font. Low-fidelity by intent.',
+    conflictsWith: ['swiss-modernism', 'apple-hig'],
+  },
+
+  // ─────────────────────────── Spatial (extended) ───────────────────────────
+  {
+    id: 'photographic-bw',
+    name: 'Documentary B&W',
+    category: 'spatial',
+    philosophy: 'Photojournalism aesthetics — full-bleed B&W imagery as structure.',
+    markers: [
+      'Full-bleed grayscale photography',
+      'Sans-serif captions with white rules',
+      'High-contrast layout grid',
+      'Generous quiet margins',
+    ],
+    cssHints: [
+      'filter: grayscale(1) contrast(1.05)',
+      'Caption rule: border-top 1px solid #fff',
+      'Black-on-image overlays for legibility',
+    ],
+    promptFragment:
+      'Lay the interface out as B&W documentary photography: full-bleed grayscale images that act as the page structure, sans-serif captions on white rules, high-contrast composition and generous quiet margins. Photojournalism as UI.',
+  },
+  {
+    id: 'architectural-blueprint',
+    name: 'Architectural Blueprint',
+    category: 'spatial',
+    philosophy: 'Technical drawing — drafting paper, dimension lines, callouts.',
+    markers: [
+      'Cyan/blue line-art on cream or white',
+      'Visible dimension lines and callouts',
+      'Technical mono labels',
+      'Isometric or orthographic projections',
+    ],
+    cssHints: [
+      'border: 1px solid #2a5fa0 with dashed dimension lines',
+      'Mono labels in IBM Plex Mono',
+      'Subtle grid background',
+    ],
+    promptFragment:
+      'Render the UI like a technical architectural drawing: cyan line-work on cream drafting paper, visible dimension lines and callouts pointing at components, monospace technical labels, isometric or orthographic projection on key visuals.',
+  },
+
+  // ─────────────────────────── AI-native (extended) ───────────────────────────
+  {
+    id: 'streaming-tokens',
+    name: 'Streaming Tokens',
+    category: 'ai-native',
+    philosophy: 'The AI is generating live — make it visible.',
+    markers: [
+      'Word-by-word reveal cadence',
+      'Cursor caret blinking at the stream tail',
+      'Soft fade on incoming tokens',
+      'Backpressure-aware skeletons',
+    ],
+    motion: 'Tokens fade in at ~30 Hz with a trailing caret.',
+    cssHints: [
+      'CSS opacity transition per chunk',
+      "::after blinking caret on streaming containers",
+      'Skeleton shimmer for awaited blocks',
+    ],
+    promptFragment:
+      'Make AI generation visible: stream output token-by-token with a soft per-chunk fade-in, a blinking caret at the stream tail, and skeleton shimmer for blocks that are still awaited. The interface should feel alive while the model thinks.',
+  },
 ];
 
 export const stylesByCategory = (cat: string) => STYLES.filter((s) => s.category === cat);

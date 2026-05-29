@@ -422,6 +422,385 @@ export function renderStyle(id: string): SampleStyle {
         body: { color: '#5c574c' },
       };
 
+    // ── Morphism (extended) ──
+    case 'glassmorphism-classic':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(160deg, #c5d8ff, #f4c5e8 70%, #ffd9a8)' },
+        surface: {
+          background: 'rgba(255,255,255,0.55)',
+          border: '1px solid rgba(255,255,255,0.7)',
+          borderRadius: 18,
+          boxShadow: '0 10px 30px rgba(50,30,90,0.18)',
+          backdropFilter: 'blur(20px) saturate(140%)',
+          color: '#2a2540',
+        },
+        button: { background: 'rgba(255,255,255,0.6)', color: '#2a2540', border: '1px solid rgba(255,255,255,0.8)', borderRadius: 999 },
+        heading: { color: '#1f1a3a', fontWeight: 600 },
+        body: { color: '#4a4470' },
+      };
+    case 'iridescent-foil':
+      return {
+        ...base,
+        scene: {
+          background:
+            'conic-gradient(from 210deg at 50% 50%, #ffd1f0, #c0f0ff, #fff2c0, #d8c5ff, #ffd1f0)',
+        },
+        surface: {
+          background:
+            'linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.18)), conic-gradient(from 90deg, #ffd1f0, #c0f0ff, #fff2c0, #d8c5ff, #ffd1f0)',
+          border: '1px solid rgba(255,255,255,0.7)',
+          borderRadius: 16,
+          boxShadow: '0 10px 30px rgba(160,120,200,0.25)',
+          color: '#2c2645',
+        },
+        button: {
+          background: 'conic-gradient(from 0deg, #ff9dd5, #9dd5ff, #ffd49d, #b59dff, #ff9dd5)',
+          color: '#1a1830',
+          border: '1px solid rgba(255,255,255,0.8)',
+          borderRadius: 999,
+        },
+        heading: { color: '#1f1a3a', fontWeight: 700 },
+        body: { color: '#5a527a' },
+        grain: 0.08,
+      };
+    case 'risograph':
+      return {
+        ...base,
+        scene: { background: '#fbf6e9' },
+        surface: {
+          background: '#fbf6e9',
+          border: '2px solid #ff5fa2',
+          borderRadius: 6,
+          boxShadow: '4px 4px 0 0 rgba(91,168,224,0.85)',
+          color: '#2b2438',
+        },
+        button: { background: '#ff5fa2', color: '#fbf6e9', border: '2px solid #2b2438', borderRadius: 4 },
+        heading: { color: '#2b2438', fontWeight: 700 },
+        body: { color: '#5b5570' },
+        grain: 0.22,
+      };
+    case 'plywood-material':
+      return {
+        ...base,
+        scene: {
+          background:
+            'repeating-linear-gradient(95deg, #d8b78a 0 6px, #cfa97a 6px 9px, #d8b78a 9px 18px), #c9a070',
+        },
+        surface: {
+          background: 'linear-gradient(180deg,#fbf3e1,#f1e7cf)',
+          border: '1px solid #b08c5e',
+          borderRadius: 6,
+          boxShadow: '0 8px 18px rgba(80,55,25,0.3)',
+          color: '#3a2c14',
+        },
+        button: { background: '#7a5230', color: '#fbf3e1', border: '1px solid #5a3a1c', borderRadius: 4 },
+        heading: { color: '#2a1d08', fontWeight: 700, fontFamily: "'Roboto Slab', Georgia, serif" },
+        body: { color: '#5a4830' },
+        grain: 0.15,
+      };
+
+    // ── Structure (extended) ──
+    case 'swiss-modernism':
+      return {
+        ...base,
+        scene: { background: '#f4f1e9' },
+        surface: {
+          background: '#fbf9f4',
+          border: 'none',
+          borderRadius: 0,
+          boxShadow: 'none',
+          borderTop: '2px solid #1a1814',
+          color: '#1a1814',
+        },
+        button: { background: 'transparent', color: '#1a1814', border: '1px solid #1a1814', borderRadius: 0 },
+        heading: { color: '#1a1814', fontWeight: 700, fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif", letterSpacing: '-0.02em' },
+        body: { color: '#4c463c' },
+      };
+    case 'newsroom-editorial':
+      return {
+        ...base,
+        scene: { background: '#f8f3e8' },
+        surface: { background: '#f8f3e8', border: 'none', borderRadius: 0, boxShadow: 'none', color: '#1a1814' },
+        button: { background: '#1a1814', color: '#f8f3e8', border: 'none', borderRadius: 0 },
+        heading: { color: '#1a1814', fontWeight: 800, fontFamily: "'Playfair Display', Georgia, serif" },
+        body: { color: '#3c362c', fontFamily: "'Source Serif 4', Georgia, serif" },
+      };
+    case 'maximalism':
+      return {
+        ...base,
+        scene: {
+          background:
+            'radial-gradient(40% 40% at 20% 30%, #ffd45f, transparent), radial-gradient(35% 35% at 75% 65%, #5fb8ff, transparent), radial-gradient(40% 40% at 60% 20%, #ff6bbf, transparent), #fdf2ef',
+        },
+        surface: {
+          background: '#fffae8',
+          border: '3px solid #1a1814',
+          borderRadius: 14,
+          boxShadow: '7px 7px 0 0 #ff5fa2, 12px 12px 0 0 #5fb8ff',
+          color: '#1a1814',
+          transform: 'rotate(-1.5deg)',
+        },
+        button: { background: '#ffd45f', color: '#1a1814', border: '3px solid #1a1814', borderRadius: 4 },
+        heading: { color: '#1a1814', fontWeight: 900 },
+        body: { color: '#3c2c14' },
+      };
+    case 'dieter-rams':
+      return {
+        ...base,
+        scene: { background: '#e8e5e0' },
+        surface: {
+          background: '#fbfaf7',
+          border: '1px solid #c5c0b8',
+          borderRadius: 2,
+          boxShadow: 'none',
+          color: '#1c1c1c',
+        },
+        button: { background: '#d84a1f', color: '#fff', border: 'none', borderRadius: 2 },
+        heading: { color: '#1c1c1c', fontWeight: 500, letterSpacing: '0.04em', textTransform: 'uppercase', fontSize: 12 } as CSSProperties,
+        body: { color: '#5a5854' },
+      };
+    case 'linear-pro':
+      return {
+        ...base,
+        scene: {
+          background:
+            'radial-gradient(60% 70% at 30% 25%, rgba(108,99,255,0.35), transparent 70%), radial-gradient(50% 60% at 80% 60%, rgba(43,151,255,0.25), transparent 72%), #0a0b14',
+        },
+        surface: {
+          background: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(255,255,255,0.06)',
+          borderRadius: 10,
+          boxShadow: '0 1px 0 rgba(255,255,255,0.04) inset',
+          color: '#e7e9ff',
+        },
+        button: { background: '#6c63ff', color: '#fff', border: 'none', borderRadius: 6 },
+        heading: { color: '#f6f7ff', fontWeight: 600, letterSpacing: '-0.01em' },
+        body: { color: '#a8acce' },
+      };
+
+    // ── Vibe (extended) ──
+    case 'vaporwave':
+      return {
+        ...base,
+        scene: {
+          background:
+            'linear-gradient(180deg, #ff2bd0 0%, #b04bff 35%, #2bf5ff 70%, #2a1166 100%)',
+        },
+        surface: {
+          background: 'rgba(20,8,40,0.55)',
+          border: '1px solid #ff2bd0',
+          borderRadius: 0,
+          boxShadow: '0 0 22px rgba(43,245,255,0.5), inset 0 0 18px rgba(255,43,208,0.25)',
+          color: '#f3e8ff',
+        },
+        button: { background: 'transparent', color: '#2bf5ff', border: '1px solid #2bf5ff', borderRadius: 0 },
+        heading: { color: '#fff', fontWeight: 800, letterSpacing: '0.08em' },
+        body: { color: '#d8c8ff' },
+      };
+    case 'cyberpunk-neon':
+      return {
+        ...base,
+        scene: { background: '#05050a' },
+        surface: {
+          background: '#0a0a16',
+          border: '1px solid #ff2bd0',
+          borderRadius: 0,
+          boxShadow: '0 0 18px rgba(255,43,208,0.6)',
+          color: '#eaffff',
+          clipPath: 'polygon(0 8px, 8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%)',
+        } as CSSProperties,
+        button: { background: '#2bf5ff', color: '#05050a', border: 'none', borderRadius: 0, boxShadow: '0 0 14px rgba(43,245,255,0.7)' },
+        heading: { color: '#ff2bd0', fontWeight: 700 },
+        body: { color: '#9adfe6' },
+      };
+    case 'glitch':
+      return {
+        ...base,
+        scene: { background: '#0c0c10' },
+        surface: {
+          background: '#15151b',
+          border: '1px solid #555',
+          borderRadius: 2,
+          boxShadow: '4px 0 0 0 rgba(255,43,208,0.5), -4px 0 0 0 rgba(43,245,255,0.5)',
+          color: '#eee',
+        },
+        button: { background: '#15151b', color: '#fff', border: '1px solid #888', borderRadius: 0 },
+        heading: { color: '#fff', fontWeight: 700, textShadow: '2px 0 #ff2bd0, -2px 0 #2bf5ff' } as CSSProperties,
+        body: { color: '#bbb' },
+      };
+    case 'dark-academia':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(160deg, #f3ead2, #d8c79c)' },
+        surface: {
+          background: '#f6efdc',
+          border: '1px solid #a18650',
+          borderRadius: 4,
+          boxShadow: '0 8px 18px rgba(60,40,10,0.25)',
+          color: '#3a2a10',
+        },
+        button: { background: '#b58a3a', color: '#f6efdc', border: '1px solid #6b4a18', borderRadius: 2 },
+        heading: { color: '#2a1d08', fontWeight: 700, fontFamily: "'Playfair Display', Georgia, serif" },
+        body: { color: '#5a4828', fontFamily: "'Lora', Georgia, serif" },
+        grain: 0.18,
+      };
+    case 'solarpunk':
+      return {
+        ...base,
+        scene: {
+          background:
+            'linear-gradient(160deg, #d8ecd5, #a8d8b0 60%, #6fb88a), radial-gradient(50% 50% at 80% 20%, #f5d690, transparent)',
+        },
+        surface: {
+          background: '#f8f4e8',
+          border: '1px solid #6fb88a',
+          borderRadius: 22,
+          boxShadow: '0 8px 18px rgba(30,80,40,0.18)',
+          color: '#1f3a25',
+        },
+        button: { background: '#2f6a4a', color: '#f8f4e8', border: 'none', borderRadius: 999 },
+        heading: { color: '#1f3a25', fontWeight: 700 },
+        body: { color: '#3a5d40' },
+      };
+    case 'wabi-sabi':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(160deg, #efe6d5, #d4c4a8)' },
+        surface: {
+          background: '#f6efdc',
+          border: '1px solid #b8a47e',
+          borderRadius: 4,
+          boxShadow: '0 4px 12px rgba(80,60,30,0.15)',
+          color: '#3a2e1a',
+          transform: 'rotate(-0.4deg)',
+        },
+        button: { background: 'transparent', color: '#3a2e1a', border: '1px solid #3a2e1a', borderRadius: 0 },
+        heading: { color: '#28200e', fontWeight: 500 },
+        body: { color: '#5a4e36' },
+        grain: 0.14,
+      };
+    case 'memphis-80s':
+      return {
+        ...base,
+        scene: {
+          background:
+            'radial-gradient(circle at 20% 30%, #ffd60a 0 14px, transparent 14px), radial-gradient(circle at 80% 65%, #ff2bd0 0 14px, transparent 14px), repeating-linear-gradient(45deg,#fff 0 8px,#1a1814 8px 10px)',
+        },
+        surface: {
+          background: '#fff',
+          border: '3px solid #1a1814',
+          borderRadius: 0,
+          boxShadow: '6px 6px 0 0 #2bf5ff, 12px 12px 0 0 #ff2bd0',
+          color: '#1a1814',
+        },
+        button: { background: '#ffd60a', color: '#1a1814', border: '3px solid #1a1814', borderRadius: 0 },
+        heading: { color: '#1a1814', fontWeight: 900 },
+        body: { color: '#1a1814' },
+      };
+    case 'anti-design':
+      return {
+        ...base,
+        scene: { background: '#fff' },
+        surface: { background: '#fff', border: '1px solid #000', borderRadius: 0, boxShadow: 'none', color: '#000' },
+        button: { background: '#dcdcdc', color: '#000', border: '1px outset #aaa', borderRadius: 2 },
+        heading: { color: '#000', fontWeight: 700, fontFamily: "'Times New Roman', Times, serif" } as CSSProperties,
+        body: { color: '#000', fontFamily: "'Times New Roman', Times, serif" },
+      };
+    case 'pixel-art':
+      return {
+        ...base,
+        scene: { background: 'repeating-conic-gradient(#1d3a7a 0 25%, #295ec0 0 50%) 0 0/24px 24px' },
+        surface: {
+          background: '#fbf9f4',
+          border: '4px solid #1a1814',
+          borderRadius: 0,
+          boxShadow: '4px 4px 0 0 #1a1814, 8px 8px 0 0 #ff5c00',
+          color: '#1a1814',
+          imageRendering: 'pixelated' as CSSProperties['imageRendering'],
+        },
+        button: { background: '#ff5c00', color: '#fff', border: '3px solid #1a1814', borderRadius: 0, boxShadow: '3px 3px 0 0 #1a1814' },
+        heading: { color: '#1a1814', fontWeight: 700, fontFamily: "'Space Mono', monospace" },
+        body: { color: '#1a1814', fontFamily: "'Space Mono', monospace" },
+        mono: true,
+      };
+    case 'hand-drawn':
+      return {
+        ...base,
+        scene: { background: '#fbf6e9' },
+        surface: {
+          background: '#fffaee',
+          border: '2px solid #1a1814',
+          borderRadius: 18,
+          boxShadow: '3px 4px 0 0 rgba(26,24,20,0.25)',
+          color: '#1a1814',
+        },
+        button: { background: '#fffaee', color: '#1a1814', border: '2px solid #1a1814', borderRadius: 14 },
+        heading: { color: '#1a1814', fontWeight: 700, fontFamily: "'Caveat', 'Comic Sans MS', cursive" } as CSSProperties,
+        body: { color: '#3a3630', fontFamily: "'Caveat', 'Comic Sans MS', cursive" } as CSSProperties,
+        grain: 0.12,
+      };
+
+    // ── Spatial (extended) ──
+    case 'photographic-bw':
+      return {
+        ...base,
+        scene: {
+          background:
+            'linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.7)), repeating-linear-gradient(90deg,#888 0 2px,#666 2px 6px)',
+        },
+        surface: {
+          background: 'transparent',
+          border: 'none',
+          borderRadius: 0,
+          boxShadow: 'none',
+          color: '#fff',
+          borderTop: '1px solid #fff',
+        },
+        button: { background: '#fff', color: '#000', border: 'none', borderRadius: 0 },
+        heading: { color: '#fff', fontWeight: 600 },
+        body: { color: '#ddd' },
+      };
+    case 'architectural-blueprint':
+      return {
+        ...base,
+        scene: {
+          background:
+            'linear-gradient(0deg, rgba(20,60,120,0.92), rgba(20,60,120,0.92)), repeating-linear-gradient(0deg, transparent 0 16px, rgba(255,255,255,0.06) 16px 17px), repeating-linear-gradient(90deg, transparent 0 16px, rgba(255,255,255,0.06) 16px 17px)',
+        },
+        surface: {
+          background: 'transparent',
+          border: '1px dashed #8ec5ff',
+          borderRadius: 0,
+          boxShadow: 'none',
+          color: '#d4e7ff',
+        },
+        button: { background: 'transparent', color: '#8ec5ff', border: '1px solid #8ec5ff', borderRadius: 0 },
+        heading: { color: '#fff', fontWeight: 600, fontFamily: "'IBM Plex Mono', monospace" },
+        body: { color: '#c8d8ee', fontFamily: "'IBM Plex Mono', monospace" },
+        mono: true,
+      };
+
+    // ── AI-native (extended) ──
+    case 'streaming-tokens':
+      return {
+        ...base,
+        scene: {
+          background: 'radial-gradient(60% 80% at 50% 40%, #1a1d3a, #0a0b16)',
+        },
+        surface: {
+          background: 'rgba(255,255,255,0.04)',
+          border: '1px solid rgba(140,160,255,0.25)',
+          borderRadius: 14,
+          boxShadow: '0 0 30px rgba(100,120,255,0.25)',
+          backdropFilter: 'blur(10px)',
+          color: '#e0e4ff',
+        },
+        button: { background: '#8b9bff', color: '#0a0b16', border: 'none', borderRadius: 8 },
+        heading: { color: '#fff', fontWeight: 600 },
+        body: { color: '#a8b0d8' },
+      };
+
     default:
       return base;
   }

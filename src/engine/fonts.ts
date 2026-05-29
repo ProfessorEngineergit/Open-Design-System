@@ -7,7 +7,7 @@ export function readFontFile(file: File): Promise<{ dataUrl: string; family: str
     reader.onerror = () => reject(reader.error);
     reader.onload = () => {
       const base = file.name.replace(/\.[^.]+$/, '');
-      const family = `ODS ${base.replace(/[^a-zA-Z0-9 ]+/g, ' ').trim() || 'Custom'}`;
+      const family = `Looksmith ${base.replace(/[^a-zA-Z0-9 ]+/g, ' ').trim() || 'Custom'}`;
       resolve({ dataUrl: reader.result as string, family, fileName: file.name });
     };
     reader.readAsDataURL(file);

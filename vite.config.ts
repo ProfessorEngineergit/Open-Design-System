@@ -13,9 +13,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'Open Design System',
-        short_name: 'ODS',
-        description: 'Mix visual design styles and generate a high-quality AI prompt.',
+        name: 'Looksmith',
+        short_name: 'Looksmith',
+        description: 'Forge a look from real design styles, then ship one precise AI prompt that carries your taste.',
         theme_color: '#efece3',
         background_color: '#efece3',
         display: 'standalone',

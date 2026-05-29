@@ -21,8 +21,8 @@ export function Landing({ onStart, hasProgress }: Props) {
         <div className="brand">
           <div className="brand-mark" />
           <div>
-            <h1>Open Design System</h1>
-            <small>Design intent, not defaults</small>
+            <h1>Looksmith</h1>
+            <small>Forge a look, not a default</small>
           </div>
         </div>
         <button className="primary-btn" onClick={onStart}>
@@ -37,8 +37,8 @@ export function Landing({ onStart, hasProgress }: Props) {
             Stop shipping <em>default</em> AI design.
           </h2>
           <p className="hero-sub">
-            ODS lets you mix real design styles — glass, clay, brutalism, editorial type and dozens more — and turns
-            your choices into one precise prompt. No more burning credits guessing your way to a look.
+            Looksmith lets you forge a look — mix glass, clay, brutalism, editorial type and dozens more — then ship
+            it as one precise prompt to your AI. No more burning credits guessing your way to a vibe.
           </p>
           <div className="hero-cta">
             <button className="primary-btn hero-btn" onClick={onStart}>
@@ -95,7 +95,7 @@ export function Landing({ onStart, hasProgress }: Props) {
         </button>
       </section>
 
-      <footer className="landing-foot faint">Open Design System · build the look, then the prompt</footer>
+      <footer className="landing-foot faint">Looksmith · forge the look, ship the prompt</footer>
     </div>
   );
 }
