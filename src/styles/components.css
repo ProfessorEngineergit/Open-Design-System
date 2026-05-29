@@ -110,13 +110,14 @@
 .wizard-nav {
   position: sticky;
   bottom: 16px;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   margin-top: 32px;
   padding: 12px 14px;
-  background: rgba(251, 249, 244, 0.85);
+  background: rgba(251, 249, 244, 0.92);
   backdrop-filter: blur(16px) saturate(140%);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -469,17 +470,17 @@
   grid-template-columns: 1fr 360px;
   gap: 22px;
   align-items: stretch;
-  /* Header(~70) + Stepper(~50) + step title(~70) + step sub(~40) + floating bottom nav(~90) ≈ 320 */
-  height: calc(100dvh - 320px);
-  min-height: 480px;
+  /* Header(~80) + Stepper(~60) + step title+sub(~120) + floating nav+margin(~120) ≈ 380 */
+  height: calc(100dvh - 380px);
+  min-height: 460px;
 }
 .mix-catalog,
 .mix-priority {
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  /* room for scrollbar so it doesn't crowd the content */
-  padding-right: 8px;
+  /* room for scrollbar + breathing room above floating nav */
+  padding: 0 8px 32px 0;
 }
 .mix-catalog {
   min-width: 0;
@@ -666,23 +667,20 @@
 }
 .slot-meta {
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 .slot-meta strong {
   font-size: 13.5px;
 }
-.slot-weight {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 6px;
-  align-items: center;
-  font-size: 11px;
-  margin-top: 4px;
-}
-.slot-weight input[type='range'] {
-  margin: 0;
-}
-.slot-weight .control-val {
-  font-size: 11px;
+.slot-philosophy {
+  font-size: 11.5px;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .slot-remove {
   width: 28px;
@@ -731,6 +729,19 @@
 .mix-preview-card {
   position: relative;
   overflow: hidden;
+}
+.mix-preview-accents {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+.mix-preview-accent {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
 }
 
 @media (max-width: 900px) {

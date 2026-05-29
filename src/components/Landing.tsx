@@ -44,7 +44,7 @@ export function Landing({ onStart, hasProgress }: Props) {
             <button className="primary-btn hero-btn" onClick={onStart}>
               {hasProgress ? 'Resume your design' : 'Start designing — free'}
             </button>
-            <span className="faint">No account needed · works offline</span>
+            <span className="faint">No signup · paste straight into any AI tool</span>
           </div>
         </div>
         <div className="hero-art">

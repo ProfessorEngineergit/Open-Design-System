@@ -76,13 +76,6 @@ export function StyleMixStep({ sel, update }: Props) {
     writeRanked(next);
   };
 
-  const setWeight = (id: string, w: number) => {
-    const next = { ...sel.styleWeights };
-    if (w <= 0) delete next[id];
-    else next[id] = w;
-    update({ styleWeights: next });
-  };
-
   const onDragStart = (id: string) => (e: DragEvent) => {
     setDragging(id);
     e.dataTransfer.setData('text/plain', id);
@@ -164,7 +157,7 @@ export function StyleMixStep({ sel, update }: Props) {
         <aside className="mix-priority">
           <div className="priority-head">
             <h3>Your stack</h3>
-            <span className="faint">Click or drag styles in. Heavier slots dominate.</span>
+            <span className="faint">Click or drag styles in. Rank decides — Lead dominates.</span>
           </div>
 
           <div className="priority-slots">
@@ -189,26 +182,14 @@ export function StyleMixStep({ sel, update }: Props) {
                       <StyleThumb styleId={style.id} compact />
                       <div className="slot-meta">
                         <strong>{style.name}</strong>
-                        <label className="slot-weight">
-                          <span className="faint">Weight</span>
-                          <input
-                            type="range"
-                            min={5}
-                            max={100}
-                            step={5}
-                            value={sel.styleWeights[style.id] ?? SLOT_WEIGHTS[i]}
-                            onChange={(e) => setWeight(style.id, Number(e.target.value))}
-                            aria-label={`${style.name} weight`}
-                          />
-                          <span className="control-val">{sel.styleWeights[style.id] ?? SLOT_WEIGHTS[i]}%</span>
-                        </label>
+                        <span className="muted slot-philosophy">{style.philosophy}</span>
                       </div>
                       <button className="slot-remove" onClick={() => removeStyle(style.id)} title="Remove">
                         ✕
                       </button>
                     </div>
                   ) : (
-                    <div className="slot-empty">Drop a style here</div>
+                    <div className="slot-empty">Click or drag a style here</div>
                   )}
                 </div>
               );

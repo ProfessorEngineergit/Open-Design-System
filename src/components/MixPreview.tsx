@@ -1,7 +1,6 @@
-import { useMemo } from 'react';
+import { useMemo, type CSSProperties } from 'react';
 import type { OdsSelection } from '../engine/state';
-import { componentTokens } from '../engine/componentStyles';
-import { GlassFilter } from './LiquidGlass';
+import { renderStyle } from '../engine/styleRender';
 import { activeStyles } from '../engine/promptEngine';
 import { fontStackForRole } from '../engine/fonts';
 import { typeSystemById } from '../data/typography';
@@ -10,58 +9,103 @@ interface Props {
   sel: OdsSelection;
 }
 
-/** Compact live preview that morphs as the user re-orders / weights styles. */
-export function MixPreview({ sel }: Props) {
-  const activeIds = useMemo(() => {
-    const ids = activeStyles(sel).map((a) => a.style.id);
-    if (sel.basePhysics) ids.push(sel.basePhysics);
-    return ids;
-  }, [sel]);
+/** Pull a representative accent color out of a rendered style's button. */
+function accentFrom(buttonStyle: CSSProperties): string {
+  const bg = buttonStyle.background ?? buttonStyle.backgroundColor;
+  return typeof bg === 'string' ? bg : '#cc785c';
+}
 
-  const t = useMemo(() => componentTokens(sel.visuals, activeIds), [sel.visuals, activeIds]);
+/** Live preview that renders the actual lead style (not a generic clay
+ *  fallback) and accents it with the supporting + accent style colors. */
+export function MixPreview({ sel }: Props) {
+  const ranked = useMemo(() => activeStyles(sel), [sel]);
+  const leadId = ranked[0]?.style.id ?? sel.basePhysics ?? 'apple-hig';
+  const lead = useMemo(() => renderStyle(leadId), [leadId]);
+
   const type = sel.typeSystem ? typeSystemById(sel.typeSystem) : null;
   const headingFont = fontStackForRole(sel, 'heading', type?.headingStack ?? 'var(--font-display)');
   const bodyFont = fontStackForRole(sel, 'body', type?.bodyStack ?? 'var(--font-body)');
 
-  const ranked = activeStyles(sel);
-  const dominantName = ranked[0]?.style.name;
-  const surfaceKind = dominantName
-    ?? (t.brutal ? 'Neo-brutalist' : t.clay ? 'Claymorphic' : t.glass ? 'Liquid glass' : 'Soft material');
+  const surfaceKind = ranked[0]?.style.name ?? 'Foundation only';
+  const supporting = ranked.slice(1, 3);
+
+  const eyebrowColor =
+    typeof lead.heading.color === 'string' ? lead.heading.color : '#1a1814';
+  const bodyColor =
+    typeof lead.body.color === 'string' ? lead.body.color : '#5c574c';
 
   return (
-    <div className="mix-preview-stage">
-      <GlassFilter id="ods-glass-mix" scale={t.glassScale} />
-      <div className="preview-scene">
-        <span className="scene-orb orb-a" />
-        <span className="scene-orb orb-b" />
-        <span className="scene-orb orb-c" />
-      </div>
-
-      <div className="mix-preview-body" style={{ color: t.text, fontFamily: bodyFont }}>
-        <div className="mix-preview-kicker" style={{ color: t.brutal ? t.text : t.accentDeep }}>
+    <div className="mix-preview-stage" style={{ ...lead.scene }}>
+      <div className="mix-preview-body" style={{ fontFamily: bodyFont }}>
+        <div className="mix-preview-kicker" style={{ color: eyebrowColor }}>
           {surfaceKind} · live
         </div>
         <div
           className="mix-preview-card"
           style={{
-            ...t.surface,
-            backdropFilter: t.glass
-              ? `url(#ods-glass-mix) blur(${sel.visuals.blur}px) saturate(${sel.visuals.saturation}%)`
-              : (t.surface.backdropFilter as string | undefined),
-            WebkitBackdropFilter: t.glass
-              ? `url(#ods-glass-mix) blur(${sel.visuals.blur}px) saturate(${sel.visuals.saturation}%)`
-              : (t.surface.WebkitBackdropFilter as string | undefined),
-            padding: 20,
+            ...lead.surface,
+            padding: 18,
+            fontFamily: lead.mono ? "'JetBrains Mono', ui-monospace, monospace" : bodyFont,
           }}
         >
-          <h4 style={{ fontFamily: headingFont, fontSize: 18, margin: 0 }}>Your component</h4>
-          <p style={{ color: t.muted, fontSize: 13, margin: '4px 0 14px' }}>
-            Re-order or weight styles — the button and surface update live.
+          {lead.grain ? <span className="grain-overlay" style={{ opacity: lead.grain }} /> : null}
+          <h4
+            style={{
+              ...lead.heading,
+              fontFamily: lead.heading.fontFamily ?? headingFont,
+              fontSize: 18,
+              margin: 0,
+              position: 'relative',
+            }}
+          >
+            Your component
+          </h4>
+          <p
+            style={{
+              ...lead.body,
+              fontFamily: lead.body.fontFamily ?? bodyFont,
+              fontSize: 13,
+              margin: '4px 0 14px',
+              position: 'relative',
+            }}
+          >
+            Click another style to promote it. The preview always shows your Lead.
           </p>
-          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-            <button style={t.primaryBtn}>Primary</button>
-            <button style={t.secondaryBtn}>Cancel</button>
-            <span style={t.badge}>New</span>
+          <div
+            style={{
+              display: 'flex',
+              gap: 10,
+              flexWrap: 'wrap',
+              alignItems: 'center',
+              position: 'relative',
+            }}
+          >
+            <button
+              style={{
+                ...lead.button,
+                padding: '8px 16px',
+                fontWeight: 600,
+                fontSize: 13,
+                cursor: 'pointer',
+              }}
+            >
+              Primary
+            </button>
+            {supporting.length > 0 && (
+              <div className="mix-preview-accents" aria-hidden>
+                {supporting.map((s, i) => {
+                  const r = renderStyle(s.style.id);
+                  return (
+                    <span
+                      key={s.style.id}
+                      className="mix-preview-accent"
+                      title={`${i === 0 ? 'Supporting' : 'Accent'} — ${s.style.name}`}
+                      style={{ background: accentFrom(r.button), borderColor: bodyColor }}
+                    />
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>

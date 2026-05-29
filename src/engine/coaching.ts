@@ -79,11 +79,11 @@ export function getCoaching(sel: OdsSelection): Coaching {
   } else if (active.length >= 2 && active.length <= 4) {
     headline = 'Nice mix forming';
     tip =
-      'You have a real direction now. Use the intensity sliders so one style leads and the others support it.';
+      'You have a real direction now. Click your favorite again to promote it to Lead — that style drives the rest.';
   } else if (active.length > 4) {
     headline = 'Lots going on';
     tip =
-      'Five+ styles can fight each other. Keep one dominant (high intensity) and let the rest stay subtle, or drop a few.';
+      'Five+ styles can fight each other. Keep the Lead clear and the others as quiet supports, or drop a few.';
   }
 
   if (warnings.length) {
