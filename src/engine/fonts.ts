@@ -1,6 +1,6 @@
 import type { CustomFont, FontRole, OdsSelection } from './state';
 
-/** Read an uploaded font file into a data URL + a safe CSS family name. */
+/** Read an uploaded font into a data URL and a safe CSS family name. */
 export function readFontFile(file: File): Promise<{ dataUrl: string; family: string; fileName: string }> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -16,7 +16,7 @@ export function readFontFile(file: File): Promise<{ dataUrl: string; family: str
 
 const registered = new Set<string>();
 
-/** Register a single font with the browser if it isn't already loaded. */
+/** Hand a font to the browser, unless we've already loaded it. */
 export async function registerFont(family: string, dataUrl: string): Promise<void> {
   if (registered.has(family)) return;
   registered.add(family);
@@ -29,7 +29,7 @@ export async function registerFont(family: string, dataUrl: string): Promise<voi
   }
 }
 
-/** Re-register all persisted custom fonts (call on app load). */
+/** Re-add every saved font when the app boots. */
 export function ensureFontsRegistered(fonts: CustomFont[]): void {
   fonts.forEach((f) => void registerFont(f.family, f.dataUrl));
 }
@@ -37,7 +37,7 @@ export function ensureFontsRegistered(fonts: CustomFont[]): void {
 export const customFontForRole = (sel: OdsSelection, role: FontRole): CustomFont | undefined =>
   sel.customFonts.find((f) => f.role === role);
 
-/** Prepend any custom font for a role onto the fallback stack. */
+/** If the user uploaded a font for this role, put it first in the stack. */
 export function fontStackForRole(sel: OdsSelection, role: FontRole, fallback: string): string {
   const custom = customFontForRole(sel, role);
   return custom ? `'${custom.family}', ${fallback}` : fallback;

@@ -10,17 +10,17 @@ export interface DesignStyle {
   id: string;
   name: string;
   category: StyleCategory;
-  /** One-line philosophy / core idea. */
+  /** The core idea, in one line. */
   philosophy: string;
-  /** Concrete visual markers a designer would recognize. */
+  /** Tell-tale visual cues a designer would spot. */
   markers: string[];
-  /** Motion / interaction character, if distinctive. */
+  /** How it moves, if movement is part of its character. */
   motion?: string;
-  /** Concrete CSS techniques that realize the look. */
+  /** The CSS tricks that actually pull the look off. */
   cssHints: string[];
-  /** Sentence(s) injected into the generated prompt when this style is chosen. */
+  /** What we drop into the prompt when someone picks this style. */
   promptFragment: string;
-  /** Styles that clash hard with this one (used to warn in the mixer). */
+  /** Styles that really don't get along with this one — we warn about these. */
   conflictsWith?: string[];
 }
 
@@ -28,6 +28,6 @@ export interface CategoryMeta {
   id: StyleCategory;
   label: string;
   description: string;
-  /** Selection rule for this category in the wizard. */
+  /** Whether you pick just one from this category, or several. */
   selection: 'single' | 'multi';
 }

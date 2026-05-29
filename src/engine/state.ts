@@ -1,4 +1,4 @@
-/** Continuous visual parameters tuned in the live mixer. */
+/** The knobs the mixer sliders write into. */
 export interface VisualParams {
   radius: number; // px, corner radius
   blur: number; // px, backdrop blur
@@ -26,26 +26,26 @@ export const DEFAULT_VISUALS: VisualParams = {
 export type FontRole = 'heading' | 'body';
 
 export interface CustomFont {
-  /** sanitized CSS family name we register the font under */
+  /** the CSS family name we register it under (cleaned up) */
   family: string;
   role: FontRole;
-  /** original uploaded filename, shown in the UI */
+  /** the original filename, so we can show it back to the user */
   fileName: string;
-  /** base64 data URL of the font file, so it survives reloads */
+  /** the font itself as a base64 data URL, so it survives a reload */
   dataUrl: string;
 }
 
 export interface OdsSelection {
   projectType: string | null;
   basePhysics: string | null;
-  /** style id -> intensity weight 0..100 */
+  /** style id → how strongly it's weighted, 0 to 100 */
   styleWeights: Record<string, number>;
-  /** chosen typography system id */
+  /** which type pairing they picked */
   typeSystem: string | null;
-  /** user-uploaded fonts, assigned to heading/body roles */
+  /** any fonts the user brought, slotted into heading or body */
   customFonts: CustomFont[];
   visuals: VisualParams;
-  /** free-text extra instructions from the user */
+  /** anything extra the user typed in */
   notes: string;
 }
 

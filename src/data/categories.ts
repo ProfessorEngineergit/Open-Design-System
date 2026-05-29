@@ -5,37 +5,37 @@ export const CATEGORIES: CategoryMeta[] = [
     id: 'base-physics',
     label: 'Base Physics',
     description:
-      'The foundational law of light, depth and motion. Pick one — it sets the substrate every other style sits on.',
+      'The base your whole design sits on — how light, depth and motion behave. Pick one.',
     selection: 'single',
   },
   {
     id: 'morphism',
     label: 'Material & Morphism',
-    description: 'The "skin" of your components — how surfaces feel: glass, clay, extrusion, texture.',
+    description: 'How your surfaces feel — glass, clay, soft extrusion, texture.',
     selection: 'multi',
   },
   {
     id: 'structure',
     label: 'Structure & Layout',
-    description: 'How content is organized in the viewport: grids, typography, density.',
+    description: "How everything's arranged — grids, type, how dense or airy it feels.",
     selection: 'multi',
   },
   {
     id: 'vibe',
     label: 'Vibe & Subculture',
-    description: 'Emotional direction — nostalgia, rawness, playfulness. The "mood".',
+    description: "The mood — nostalgic, raw, playful, whatever you're going for.",
     selection: 'multi',
   },
   {
     id: 'spatial',
     label: 'Spatial & Dimensional',
-    description: 'Depth beyond the flat screen: parallax, 3D, tactile hardware.',
+    description: 'Depth past the flat screen — parallax, 3D, hardware you can almost feel.',
     selection: 'multi',
   },
   {
     id: 'ai-native',
     label: 'AI-Native & Adaptive',
-    description: 'Paradigms born from AI and modern displays: generative, agentic, OLED.',
+    description: 'Looks that grew out of AI and modern screens — generative, agentic, true-black OLED.',
     selection: 'multi',
   },
 ];

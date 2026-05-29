@@ -14,12 +14,12 @@ interface Props {
 const SLOT_WEIGHTS = [85, 55, 30] as const;
 const SLOT_LABELS = ['Lead', 'Supporting', 'Accent'] as const;
 const SLOT_HINTS = [
-  'Drives the whole look',
-  'Adds a second voice',
-  'A grace note, not a fight',
+  'Sets the overall tone',
+  'Backs up the lead',
+  'A finishing touch, not a fight',
 ];
 
-/** Returns the active style ids ordered by weight (strongest first). */
+/** Active style ids, strongest first. */
 function rankedIds(weights: Record<string, number>): string[] {
   return Object.entries(weights)
     .sort((a, b) => b[1] - a[1])
@@ -32,13 +32,13 @@ export function StyleMixStep({ sel, update }: Props) {
 
   const ranked = rankedIds(sel.styleWeights);
 
-  /** Rebuild weights from a desired ordered list of ids. */
+  /** Turn an ordered list of ids back into the weight map. */
   const writeRanked = (ids: string[]) => {
     const next: Record<string, number> = {};
     ids.slice(0, 3).forEach((id, i) => {
       next[id] = SLOT_WEIGHTS[i];
     });
-    // anything past slot 3 stays at a low weight so we don't silently drop selections
+    // keep extras at a low weight rather than quietly dropping them
     ids.slice(3).forEach((id) => {
       next[id] = 20;
     });
@@ -57,10 +57,10 @@ export function StyleMixStep({ sel, update }: Props) {
     writeRanked(ranked.filter((x) => x !== id));
   };
 
-  /** Single-click promotion path. Always reliable, no D&D required.
-   *  - Not active → drop into the first empty slot (or append).
-   *  - Active and not yet Lead → promote one tier up.
-   *  - Active and already Lead → remove. */
+  /** What a plain click does — no drag needed, so it always works.
+   *  - not in the stack yet → drop it into the first open slot
+   *  - in the stack but not Lead → bump it up one
+   *  - already Lead → take it back out */
   const cycleStyle = (id: string) => {
     const idx = ranked.indexOf(id);
     if (idx === -1) {
@@ -104,8 +104,8 @@ export function StyleMixStep({ sel, update }: Props) {
     <section>
       <h2 className="step-title">Mix your styles</h2>
       <p className="step-sub muted">
-        Click any style on the left to add it. Click it again to promote its priority. Drag also works. Lead drives the
-        look, Supporting adds a voice, Accent is the grace note — the button on the right morphs live.
+        Click a style on the left to add it, click again to bump it up the order (dragging works too). Lead sets the
+        tone, Supporting backs it up, Accent is the finishing touch. The preview on the right keeps up.
       </p>
 
       <div className="mix-layout-v2">
@@ -157,7 +157,7 @@ export function StyleMixStep({ sel, update }: Props) {
         <aside className="mix-priority">
           <div className="priority-head">
             <h3>Your stack</h3>
-            <span className="faint">Click or drag styles in. Rank decides — Lead dominates.</span>
+            <span className="faint">Order is everything here — whatever's on top leads.</span>
           </div>
 
           <div className="priority-slots">

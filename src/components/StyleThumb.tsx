@@ -2,11 +2,11 @@ import { renderStyle } from '../engine/styleRender';
 
 interface Props {
   styleId: string;
-  /** Compact mode shrinks paddings for grid cards. */
+  /** Compact trims the padding so it fits in a grid card. */
   compact?: boolean;
 }
 
-/** A live mini-sample (heading + body + button) rendered in the actual style. */
+/** A tiny live sample — heading, body, button — in the real style. */
 export function StyleThumb({ styleId, compact }: Props) {
   const s = renderStyle(styleId);
   return (

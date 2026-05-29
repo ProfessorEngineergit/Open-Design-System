@@ -31,7 +31,7 @@ export function OutputStep({ sel }: Props) {
       <div className="output-head">
         <div>
           <h2 className="step-title">Your prompt is ready</h2>
-          <p className="step-sub muted">Paste it into any AI coding tool. Tweak earlier steps to regenerate live.</p>
+          <p className="step-sub muted">Paste it into any AI coding tool. Go back and change anything — it rewrites itself.</p>
         </div>
         <div className="row">
           <button className="ghost-btn" onClick={download}>

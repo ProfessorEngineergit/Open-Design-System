@@ -12,15 +12,15 @@ export interface TypeSystem {
   id: string;
   name: string;
   category: TypeCategory;
-  /** Heading font stack (first entry is the intended face). */
+  /** Font stack for headings — the first name is the one we really want. */
   headingStack: string;
-  /** Body font stack. */
+  /** Font stack for body text. */
   bodyStack: string;
-  /** One-line character of the pairing. */
+  /** What the pairing feels like, in a few words. */
   character: string;
   /** Mood tags. */
   vibes: string[];
-  /** Sentence injected into the prompt. */
+  /** What goes into the prompt for this pairing. */
   promptFragment: string;
 }
 

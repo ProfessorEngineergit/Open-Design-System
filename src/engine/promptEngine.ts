@@ -7,7 +7,7 @@ import type { OdsSelection, VisualParams } from './state';
 const intensityWord = (w: number) =>
   w >= 80 ? 'dominant' : w >= 55 ? 'strong' : w >= 30 ? 'moderate' : 'subtle';
 
-/** Styles that are actually active (weight > 0), strongest first. */
+/** The styles actually in play (weight above zero), strongest first. */
 export function activeStyles(sel: OdsSelection) {
   return Object.entries(sel.styleWeights)
     .filter(([, w]) => w > 0)
@@ -16,7 +16,7 @@ export function activeStyles(sel: OdsSelection) {
     .filter((x) => x.style);
 }
 
-/** Detect clashing combinations among selected styles. */
+/** Spot pairs of chosen styles that tend to fight each other. */
 export function detectConflicts(sel: OdsSelection): string[] {
   const active = activeStyles(sel).map((x) => x.style.id);
   const seen = new Set<string>();
@@ -142,7 +142,7 @@ export function generatePrompt(sel: OdsSelection): GeneratedPrompt {
   lines.push('```');
   lines.push(`In prose: ${visualsToProse(sel.visuals)}.`);
 
-  // Pull concrete CSS hints from the strongest styles so the LLM has techniques to use.
+  // Grab concrete CSS tricks from the top styles so the model has something to work with.
   const hintSources = [base, ...active.slice(0, 3).map((a) => a.style)].filter(Boolean);
   const hints = [...new Set(hintSources.flatMap((s) => s!.cssHints))];
   if (hints.length) {
