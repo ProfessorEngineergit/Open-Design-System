@@ -69,26 +69,24 @@ export function getCoaching(sel: OdsSelection): Coaching {
     };
   });
 
-  let headline = 'Start with a skin';
+  let headline = 'Pick a look';
   let tip =
-    'Material & Morphism is where to begin — it sets how your surfaces feel. Hover any card to see it live.';
+    'Start with one look on the left — that\'s your base. Hover any card to see it live before you commit.';
 
-  if (active.length === 1) {
-    headline = 'Good start';
-    tip = `${active[0].style.name} it is. Add a Structure style for layout, or a Vibe to set the mood.`;
-  } else if (active.length >= 2 && active.length <= 4) {
-    headline = "Now you're getting somewhere";
-    tip =
-      "You've got a real direction going. Click your favorite again to make it the Lead — everything else falls in behind it.";
-  } else if (active.length > 4) {
-    headline = "That's a lot at once";
-    tip =
-      "Five or more styles tend to fight each other. Keep one clear Lead and let the rest stay quiet — or drop a couple.";
-  }
-
-  if (warnings.length) {
-    headline = 'These pull against each other';
-    tip = "A couple of these go in opposite directions. Totally fine if it's on purpose — just keep one clearly in charge.";
+  if (active.length >= 1) {
+    const name = active[0].style.name;
+    const hasShape = !!sel.shape;
+    const hasTexture = !!sel.texture;
+    if (hasShape && hasTexture) {
+      headline = "That's a full look";
+      tip = `${name}, shaped and textured. That'll read as deliberate — move on whenever you're happy, or keep tweaking.`;
+    } else if (hasShape || hasTexture) {
+      headline = 'Almost there';
+      tip = `Nice — ${name} with a ${hasShape ? 'shape' : 'texture'}. Add a ${hasShape ? 'texture' : 'shape'} too and it'll feel finished.`;
+    } else {
+      headline = 'Good base';
+      tip = `${name} is your base. Now layer a shape and a texture under the preview — that's where it comes together.`;
+    }
   }
 
   return { headline, tip, recommendations, warnings };

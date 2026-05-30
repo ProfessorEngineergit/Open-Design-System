@@ -743,6 +743,124 @@
   border: 1px solid currentColor;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
 }
+/* faint CRT scanlines, scoped to the surface like grain */
+.scanline-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.16) 0,
+    rgba(0, 0, 0, 0.16) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.6;
+}
+
+/* ── Base look slot ─────────────────────────── */
+.look-slot {
+  border-radius: 14px;
+  border: 1px dashed var(--border-strong);
+  background: var(--surface);
+  padding: 10px 12px;
+  transition: all 0.15s ease;
+  min-height: 84px;
+}
+.look-slot.hover {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--accent-tint);
+  transform: scale(1.01);
+}
+.look-slot.filled {
+  border-style: solid;
+  border-color: var(--accent);
+  background: var(--panel-strong);
+  box-shadow: 0 0 0 2px var(--accent-tint);
+}
+
+/* ── Shape / Texture axes ───────────────────── */
+.axis-block {
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--panel-strong);
+  padding: 12px;
+}
+.axis-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.axis-label {
+  font-weight: 700;
+  font-size: 13px;
+}
+.axis-head .faint {
+  font-size: 11.5px;
+}
+.axis-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.axis-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 11px 6px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.13s ease;
+}
+.axis-chip:hover {
+  border-color: var(--accent);
+}
+.axis-chip.on {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+  color: var(--accent-deep);
+}
+.axis-chip-glyph {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  background: currentColor;
+  opacity: 0.75;
+}
+.axis-chip-tex {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  border-radius: 4px;
+  background: var(--text-dim);
+}
+.axis-chip-tex.tex-none {
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+}
+.axis-chip-tex.tex-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-color: #b8b0a0;
+}
+.axis-chip-tex.tex-paper {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+  background-color: #e7dcc4;
+}
+.axis-chip-tex.tex-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+  background-color: #8a8478;
+}
+.axis-chip-tex.tex-scanlines {
+  background: repeating-linear-gradient(0deg, #4a4a52 0 1px, #d8d8dc 1px 3px);
+}
 
 @media (max-width: 900px) {
   .mix-layout {

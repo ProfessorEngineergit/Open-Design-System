@@ -1,22 +1,19 @@
-import { useMemo, type CSSProperties } from 'react';
+import { useMemo } from 'react';
 import type { OdsSelection } from '../engine/state';
 import { renderStyle } from '../engine/styleRender';
 import { activeStyles } from '../engine/promptEngine';
 import { fontStackForRole } from '../engine/fonts';
 import { typeSystemById } from '../data/typography';
+import { shapeById } from '../data/shapes';
+import { textureById } from '../data/textures';
 
 interface Props {
   sel: OdsSelection;
 }
 
-/** Grab a representative accent color from a style's button. */
-function accentFrom(buttonStyle: CSSProperties): string {
-  const bg = buttonStyle.background ?? buttonStyle.backgroundColor;
-  return typeof bg === 'string' ? bg : '#cc785c';
-}
-
-/** Live preview that renders the real lead style — not some generic
- *  fallback — and dots in the supporting + accent colors beside it. */
+/** Live preview that genuinely composes the three things you picked: the base
+ *  look (its scene, surface, button, type) with your shape and texture layered
+ *  on top. What you see here is what the prompt will describe. */
 export function MixPreview({ sel }: Props) {
   const ranked = useMemo(() => activeStyles(sel), [sel]);
   const leadId = ranked[0]?.style.id ?? sel.basePhysics ?? 'apple-hig';
@@ -26,29 +23,41 @@ export function MixPreview({ sel }: Props) {
   const headingFont = fontStackForRole(sel, 'heading', type?.headingStack ?? 'var(--font-display)');
   const bodyFont = fontStackForRole(sel, 'body', type?.bodyStack ?? 'var(--font-body)');
 
-  const surfaceKind = ranked[0]?.style.name ?? 'Foundation only';
-  const supporting = ranked.slice(1, 3);
+  const shape = sel.shape ? shapeById(sel.shape) : null;
+  const texture = sel.texture ? textureById(sel.texture) : null;
 
-  const eyebrowColor =
-    typeof lead.heading.color === 'string' ? lead.heading.color : '#1a1814';
-  const bodyColor =
-    typeof lead.body.color === 'string' ? lead.body.color : '#5c574c';
+  const lookName = ranked[0]?.style.name ?? 'Foundation only';
+  const kicker = [lookName, shape?.name, texture && texture.id !== 'clean' ? texture.name : null]
+    .filter(Boolean)
+    .join(' · ');
+
+  // Shape overrides the look's own corners.
+  const surfaceRadius = shape ? (shape.organic ?? shape.radius) : (lead.surface.borderRadius as number | string);
+  const buttonRadius = shape ? shape.buttonRadius : (lead.button.borderRadius as number | string);
+
+  // Texture overrides the look's own grain.
+  const grain = texture ? texture.grain : (lead.grain ?? 0);
+  const scanlines = texture?.kind === 'scanlines';
+
+  const eyebrowColor = typeof lead.heading.color === 'string' ? lead.heading.color : '#1a1814';
 
   return (
     <div className="mix-preview-stage" style={{ ...lead.scene }}>
       <div className="mix-preview-body" style={{ fontFamily: bodyFont }}>
         <div className="mix-preview-kicker" style={{ color: eyebrowColor }}>
-          {surfaceKind} · live
+          {kicker} · live
         </div>
         <div
           className="mix-preview-card"
           style={{
             ...lead.surface,
+            borderRadius: surfaceRadius,
             padding: 18,
             fontFamily: lead.mono ? "'JetBrains Mono', ui-monospace, monospace" : bodyFont,
           }}
         >
-          {lead.grain ? <span className="grain-overlay" style={{ opacity: lead.grain }} /> : null}
+          {grain > 0 && <span className="grain-overlay" style={{ opacity: grain }} />}
+          {scanlines && <span className="scanline-overlay" />}
           <h4
             style={{
               ...lead.heading,
@@ -69,20 +78,15 @@ export function MixPreview({ sel }: Props) {
               position: 'relative',
             }}
           >
-            Click another style to promote it. The preview always shows your Lead.
+            Look, shape and texture — all three layered together, live.
           </p>
           <div
-            style={{
-              display: 'flex',
-              gap: 10,
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              position: 'relative',
-            }}
+            style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center', position: 'relative' }}
           >
             <button
               style={{
                 ...lead.button,
+                borderRadius: buttonRadius,
                 padding: '8px 16px',
                 fontWeight: 600,
                 fontSize: 13,
@@ -91,21 +95,19 @@ export function MixPreview({ sel }: Props) {
             >
               Primary
             </button>
-            {supporting.length > 0 && (
-              <div className="mix-preview-accents" aria-hidden>
-                {supporting.map((s, i) => {
-                  const r = renderStyle(s.style.id);
-                  return (
-                    <span
-                      key={s.style.id}
-                      className="mix-preview-accent"
-                      title={`${i === 0 ? 'Supporting' : 'Accent'} — ${s.style.name}`}
-                      style={{ background: accentFrom(r.button), borderColor: bodyColor }}
-                    />
-                  );
-                })}
-              </div>
-            )}
+            <span
+              style={{
+                ...lead.surface,
+                background: 'transparent',
+                boxShadow: 'none',
+                borderRadius: buttonRadius,
+                padding: '7px 14px',
+                fontSize: 13,
+                fontWeight: 600,
+              }}
+            >
+              Secondary
+            </span>
           </div>
         </div>
       </div>

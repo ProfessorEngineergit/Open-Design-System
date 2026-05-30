@@ -40,6 +40,10 @@ export interface OdsSelection {
   basePhysics: string | null;
   /** style id → how strongly it's weighted, 0 to 100 */
   styleWeights: Record<string, number>;
+  /** the corner/shape treatment layered over the look */
+  shape: string | null;
+  /** the surface texture layered over the look */
+  texture: string | null;
   /** which type pairing they picked */
   typeSystem: string | null;
   /** any fonts the user brought, slotted into heading or body */
@@ -53,6 +57,8 @@ export const INITIAL_SELECTION: OdsSelection = {
   projectType: null,
   basePhysics: null,
   styleWeights: {},
+  shape: null,
+  texture: null,
   typeSystem: null,
   customFonts: [],
   visuals: DEFAULT_VISUALS,

@@ -5,6 +5,8 @@ import { GlassFilter } from './LiquidGlass';
 import { activeStyles } from '../engine/promptEngine';
 import { fontStackForRole } from '../engine/fonts';
 import { typeSystemById } from '../data/typography';
+import { shapeById } from '../data/shapes';
+import { textureById } from '../data/textures';
 
 interface Props {
   sel: OdsSelection;
@@ -53,7 +55,18 @@ interface NodeMeta {
 }
 
 export function ComponentCanvas({ sel }: Props) {
-  const v = sel.visuals;
+  // fold the chosen shape + texture into the visual params, so the components
+  // here reflect the same look you mixed earlier
+  const v = useMemo(() => {
+    const shape = sel.shape ? shapeById(sel.shape) : null;
+    const texture = sel.texture ? textureById(sel.texture) : null;
+    return {
+      ...sel.visuals,
+      radius: shape ? shape.radius : sel.visuals.radius,
+      noise: texture ? Math.round(texture.grain * 100) : sel.visuals.noise,
+    };
+  }, [sel.visuals, sel.shape, sel.texture]);
+
   const activeIds = useMemo(() => {
     const ids = activeStyles(sel).map((a) => a.style.id);
     if (sel.basePhysics) ids.push(sel.basePhysics);

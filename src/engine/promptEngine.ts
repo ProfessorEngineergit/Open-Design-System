@@ -1,11 +1,10 @@
 import { STYLES, styleById } from '../data/styles';
 import { projectTypeById } from '../data/projectTypes';
 import { typeSystemById } from '../data/typography';
+import { shapeById } from '../data/shapes';
+import { textureById } from '../data/textures';
 import { customFontForRole, fontStackForRole } from './fonts';
 import type { OdsSelection, VisualParams } from './state';
-
-const intensityWord = (w: number) =>
-  w >= 80 ? 'dominant' : w >= 55 ? 'strong' : w >= 30 ? 'moderate' : 'subtle';
 
 /** The styles actually in play (weight above zero), strongest first. */
 export function activeStyles(sel: OdsSelection) {
@@ -93,11 +92,18 @@ export function generatePrompt(sel: OdsSelection): GeneratedPrompt {
   }
 
   if (active.length) {
-    lines.push('- **Style mix (in priority order):**');
-    for (const { style, weight } of active) {
-      lines.push(`  - *${style.name}* — ${intensityWord(weight)} (${weight}%). ${style.promptFragment}`);
+    const leadStyle = active[0].style;
+    lines.push(`- **Base look:** ${leadStyle.promptFragment}`);
+    // legacy: if more than one style somehow carries weight, mention them as nudges
+    for (const { style } of active.slice(1)) {
+      lines.push(`  - with a touch of *${style.name}*. ${style.promptFragment}`);
     }
   }
+
+  const shape = sel.shape ? shapeById(sel.shape) : null;
+  const texture = sel.texture ? textureById(sel.texture) : null;
+  if (shape) lines.push(`- **Shape:** ${shape.promptFragment}`);
+  if (texture && texture.id !== 'clean') lines.push(`- **Texture:** ${texture.promptFragment}`);
 
   const type = sel.typeSystem ? typeSystemById(sel.typeSystem) : null;
   const baseHeading = type?.headingStack ?? 'system-ui, sans-serif';
@@ -134,6 +140,11 @@ export function generatePrompt(sel: OdsSelection): GeneratedPrompt {
       .map((l) => '  ' + l)
       .join('\n')
   );
+  if (shape) {
+    lines.push(`  --radius: ${shape.radius}px;`);
+    lines.push(`  --radius-button: ${shape.buttonRadius === 999 ? '999px (full pill)' : shape.buttonRadius + 'px'};`);
+    if (shape.organic) lines.push(`  --radius-organic: ${shape.organic};`);
+  }
   if (type || customHeading || customBody) {
     lines.push(`  --font-heading: ${headingStack};`);
     lines.push(`  --font-body: ${bodyStack};`);
