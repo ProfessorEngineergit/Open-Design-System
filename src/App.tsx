@@ -106,7 +106,7 @@ export default function App() {
           disabled={!canAdvance || step === STEPS.length - 1}
           onClick={() => setStep((s) => Math.min(STEPS.length - 1, s + 1))}
         >
-          {step === STEPS.length - 2 ? 'Generate prompt' : 'Continue'}
+          Continue
         </button>
       </nav>
     </div>

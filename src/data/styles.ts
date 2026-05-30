@@ -780,6 +780,368 @@ export const STYLES: DesignStyle[] = [
     promptFragment:
       'Make AI generation visible: stream output token-by-token with a soft per-chunk fade-in, a blinking caret at the stream tail, and skeleton shimmer for blocks that are still awaited. The interface should feel alive while the model thinks.',
   },
+
+  // ─────────────────────────── Structure (systems & eras) ───────────────────────────
+  {
+    id: 'flat-design',
+    name: 'Flat Design 2.0',
+    category: 'structure',
+    philosophy: 'No fake depth — bright, simple, flat. The post-skeuomorphic reset.',
+    markers: [
+      'Solid bright fills, no gradients or shadows',
+      'Simple geometric icons',
+      'Long-shadow only as a deliberate accent',
+      'Bold flat color blocks',
+    ],
+    cssHints: ['Flat solid backgrounds, no box-shadow', 'A bright flat palette (#1abc9c, #e74c3c, #3498db…)', 'Simple 2px line or solid-fill icons'],
+    promptFragment:
+      'Use Flat Design 2.0: solid bright fills with no gradients or drop shadows, simple geometric iconography, generous flat color blocks, and (sparingly) a single long-shadow accent. Clarity over realism.',
+    conflictsWith: ['skeuomorphism', 'neumorphism'],
+  },
+  {
+    id: 'material-2',
+    name: 'Material Design 2',
+    category: 'structure',
+    philosophy: 'Paper and ink — Google’s classic elevation system.',
+    markers: [
+      'Cards that cast real elevation shadows',
+      'A floating action button (FAB)',
+      'Bold single primary color + accent',
+      'Ripple feedback on tap',
+    ],
+    motion: 'Material motion — ripples from the touch point, shared-element transitions.',
+    cssHints: ['Elevation shadows on a 0–24dp scale', 'A 600-weight primary + accent color', 'Circular FAB with a single icon'],
+    promptFragment:
+      'Use classic Material Design 2: surfaces are sheets of paper at different elevations (real layered shadows), a bold primary color with an accent, a circular floating action button, and ripple feedback radiating from the touch point.',
+    conflictsWith: ['flat-design'],
+  },
+  {
+    id: 'metro',
+    name: 'Metro / Modern UI',
+    category: 'structure',
+    philosophy: 'Content over chrome — flat typographic tiles. The Windows Phone era.',
+    markers: [
+      'Live tiles in a grid',
+      'Big, light-weight typography as the interface',
+      'Bold flat accent on dark or white',
+      'Edge-to-edge, no borders or bevels',
+    ],
+    motion: 'Tiles flip and slide; fast typographic transitions.',
+    cssHints: ['Square/rectangular tiles in a tight grid', 'A single saturated accent (often one per app)', 'Light-weight large headings, tight to the edge'],
+    promptFragment:
+      'Use the Metro / Modern UI language: a grid of flat rectangular tiles, large light-weight typography doing the navigational work, one saturated accent color, and absolutely no bevels or borders — content runs edge to edge.',
+    conflictsWith: ['skeuomorphism', 'neumorphism'],
+  },
+  {
+    id: 'ibm-carbon',
+    name: 'IBM Carbon',
+    category: 'structure',
+    philosophy: 'Confident, productive enterprise design on a strict grid.',
+    markers: [
+      'IBM Plex type family',
+      '2px grid, square corners',
+      'Restrained palette with IBM blue',
+      'Dense data tables and clear states',
+    ],
+    cssHints: ['IBM Plex Sans / Mono', 'border-radius: 0; 2px spacing grid', 'Primary #0f62fe on near-white or #161616'],
+    promptFragment:
+      'Use the IBM Carbon design language: IBM Plex typography, a strict 2px grid with square corners, a restrained palette anchored by IBM blue (#0f62fe), and dense, legible data tables. Productive and confident, never decorative.',
+  },
+  {
+    id: 'modern-minimal',
+    name: 'Modern Minimal',
+    category: 'structure',
+    philosophy: 'The 2024 open-source default — neutral, subtle, accessible.',
+    markers: [
+      'Neutral zinc/slate palette, one accent',
+      'Soft 8–12px radii, hairline borders',
+      'Subtle shadows, lots of whitespace',
+      'Tight grotesque type (Inter/Geist)',
+    ],
+    cssHints: ['Zinc/slate neutral scale + a single accent', 'border-radius ~10px, 1px subtle borders', 'Very soft shadows, focus rings for a11y'],
+    promptFragment:
+      'Use the modern minimal style that tools like shadcn/ui and Radix popularised: a neutral zinc/slate palette with one accent, soft ~10px corners, hairline borders, very subtle shadows, tight Inter/Geist typography, and visible focus rings. Calm, accessible, slightly boring on purpose.',
+  },
+  {
+    id: 'fintech',
+    name: 'Neobank / Fintech',
+    category: 'structure',
+    philosophy: 'Trust through clarity — big numbers, calm color, tight type.',
+    markers: [
+      'Oversized balance/number typography',
+      'Card-based account tiles',
+      'A confident single brand color',
+      'Monospace for figures and codes',
+    ],
+    cssHints: ['Tabular/mono numerals for money', 'Rounded brand-colored cards', 'Generous spacing, restrained accents'],
+    promptFragment:
+      'Use a neobank / fintech style: oversized tabular numbers for balances, rounded account cards in a confident single brand color, monospace for figures and codes, and a calm, spacious layout that signals trust.',
+  },
+
+  // ─────────────────────────── Morphism (extended again) ───────────────────────────
+  {
+    id: 'skeuominimalism',
+    name: 'Skeuominimalism',
+    category: 'morphism',
+    philosophy: 'Skeuomorphism’s subtle revival — just enough depth to feel touchable.',
+    markers: [
+      'Soft realistic shadows, gentle gradients',
+      'Tactile but not literal (no leather/wood)',
+      'Light inner highlights on controls',
+      'Restrained, modern palette',
+    ],
+    cssHints: ['Subtle dual shadows + faint inner highlight', 'Gentle 2–6% gradients on fills', 'Modern palette, soft 12–16px radii'],
+    promptFragment:
+      'Use skeuominimalism: the 2023 revival of subtle realism — gentle gradients, soft realistic shadows and faint inner highlights that make controls feel touchable, but with a clean modern palette and none of the literal leather-and-wood of old skeuomorphism.',
+    conflictsWith: ['flat-design'],
+  },
+  {
+    id: 'duotone',
+    name: 'Duotone',
+    category: 'morphism',
+    philosophy: 'Two colors, total commitment — the Spotify-era photographic treatment.',
+    markers: [
+      'Images mapped to a two-color gradient',
+      'A bold shadow + highlight color pair',
+      'High-contrast, graphic feel',
+      'Type in one of the two tones',
+    ],
+    cssHints: ['mix-blend-mode + duotone gradient maps over images', 'A committed two-color palette', 'High contrast between the pair'],
+    promptFragment:
+      'Use a duotone treatment: map photography to a bold two-color gradient (a dark shadow tone and a bright highlight tone), keep type in one of the two colors, and lean into the high-contrast, graphic, poster-like result.',
+  },
+
+  // ─────────────────────────── Vibe (movements & subcultures) ───────────────────────────
+  {
+    id: 'bauhaus',
+    name: 'Bauhaus',
+    category: 'vibe',
+    philosophy: 'Form follows function — primary colors and pure geometry.',
+    markers: [
+      'Red / yellow / blue + black on cream',
+      'Circles, triangles, squares as building blocks',
+      'Geometric sans, often lowercase',
+      'Asymmetric but balanced composition',
+    ],
+    cssHints: ['Primary palette on warm off-white', 'Bold geometric shape blocks', 'Geometric sans (Futura-like), tight grid'],
+    promptFragment:
+      'Use the Bauhaus aesthetic: a primary palette (red, yellow, blue) plus black on warm cream, composition built from pure circles, triangles and squares, geometric sans typography (often lowercase), and asymmetric-but-balanced layout. Function first, ornament never.',
+    conflictsWith: ['skeuomorphism'],
+  },
+  {
+    id: 'art-deco',
+    name: 'Art Deco',
+    category: 'vibe',
+    philosophy: 'Machine-age glamour — gold, symmetry and stepped geometry.',
+    markers: [
+      'Gold / brass on deep black or emerald',
+      'Symmetrical, stepped (ziggurat) motifs',
+      'High-contrast display serifs, all-caps',
+      'Fine line ornament and sunbursts',
+    ],
+    cssHints: ['Gold (#c9a24b) on near-black or deep green', 'Symmetric layouts, stepped/fan borders', 'Elegant high-contrast caps display type'],
+    promptFragment:
+      'Use Art Deco: machine-age glamour with gold or brass on deep black or emerald, strict symmetry, stepped ziggurat and sunburst motifs, fine line ornament, and elegant high-contrast all-caps display serifs.',
+    conflictsWith: ['neo-brutalism', 'anti-design'],
+  },
+  {
+    id: 'art-nouveau',
+    name: 'Art Nouveau',
+    category: 'vibe',
+    philosophy: 'Nature as ornament — whiplash curves and floral line-work.',
+    markers: [
+      'Organic “whiplash” curves',
+      'Botanical line ornament framing content',
+      'Muted earthy + gold palette',
+      'Flowing, decorative display type',
+    ],
+    cssHints: ['SVG floral / vine line ornaments', 'Sinuous curved dividers, generous frames', 'Earthy muted palette with gilt accents'],
+    promptFragment:
+      'Use Art Nouveau: nature turned into ornament — sinuous whiplash curves, botanical vine line-work framing the content, a muted earthy palette with gilt accents, and flowing decorative display type. Everything curves; nothing is purely rectangular.',
+    conflictsWith: ['neo-brutalism', 'swiss-modernism'],
+  },
+  {
+    id: 'constructivism',
+    name: 'Constructivism',
+    category: 'vibe',
+    philosophy: 'Art as propaganda — diagonal grids, red and black, raw power.',
+    markers: [
+      'Red, black and off-white only',
+      'Strong diagonals and angled type',
+      'Heavy geometric sans, all-caps',
+      'Photomontage and bold rules',
+    ],
+    cssHints: ['Red #d6202a + black on paper', 'Rotated/diagonal type and blocks', 'Heavy bars and angled dividers'],
+    promptFragment:
+      'Use Russian Constructivism: a red-black-and-paper palette, aggressive diagonal grids with angled all-caps type, heavy geometric sans, bold rules and photomontage. Dynamic, political, unmistakably loud.',
+    conflictsWith: ['cutealism', 'frutiger-aero'],
+  },
+  {
+    id: 'pop-art',
+    name: 'Pop Art',
+    category: 'vibe',
+    philosophy: 'Comic-book pop — Ben-Day dots and loud primaries.',
+    markers: [
+      'Ben-Day halftone dot patterns',
+      'Bold primary colors + black outlines',
+      'Comic “speech bubble” and burst shapes',
+      'Heavy outlined display type',
+    ],
+    cssHints: ['Radial-gradient halftone dot backgrounds', 'Thick black outlines on everything', 'Primary fills, comic burst shapes'],
+    promptFragment:
+      'Use Pop Art: Lichtenstein-style Ben-Day halftone dots, loud primary colors with thick black outlines, comic speech-bubbles and burst shapes, and heavy outlined display type. Playful, graphic, high-energy.',
+    conflictsWith: ['ultra-minimalism', 'quiet-luxury'],
+  },
+  {
+    id: 'grunge',
+    name: 'Grunge',
+    category: 'vibe',
+    philosophy: '90s zine energy — distressed, photocopied, torn.',
+    markers: [
+      'Distressed textures and ink splatter',
+      'Torn paper and tape edges',
+      'Ransom-note mixed type',
+      'Muted, dirty palette',
+    ],
+    cssHints: ['Grunge/scratch texture overlays', 'Rotated torn-paper edges, tape strips', 'Mixed clashing typefaces, heavy grain'],
+    promptFragment:
+      'Use a 90s grunge / zine aesthetic: distressed and photocopied textures, ink splatter, torn-paper and tape edges, ransom-note mixed typography, and a muted dirty palette. Deliberately rough and hand-made.',
+    conflictsWith: ['ultra-minimalism', 'quiet-luxury', 'apple-hig'],
+  },
+  {
+    id: 'steampunk',
+    name: 'Steampunk',
+    category: 'vibe',
+    philosophy: 'Victorian machinery — brass, gears and aged paper.',
+    markers: [
+      'Brass and copper on aged parchment',
+      'Exposed gears, rivets and dials',
+      'Ornate Victorian serif type',
+      'Mechanical, tactile controls',
+    ],
+    cssHints: ['Brass gradients + parchment texture', 'Gear / cog SVG ornaments, rivet details', 'Ornate serif headings, sepia grain'],
+    promptFragment:
+      'Use Steampunk: Victorian machinery rendered in brass and copper on aged parchment, exposed gears, rivets and dials, ornate serif typography, and tactile mechanical controls. Retro-futurist by way of the 1800s.',
+    conflictsWith: ['ultra-minimalism', 'modern-minimal'],
+  },
+  {
+    id: 'cottagecore',
+    name: 'Cottagecore',
+    category: 'vibe',
+    philosophy: 'Cosy pastoral nostalgia — soft floral and warm naturals.',
+    markers: [
+      'Warm cream, sage and dusty rose',
+      'Floral and botanical motifs',
+      'Soft serif or handwritten type',
+      'Gentle, rounded, hand-made feel',
+    ],
+    cssHints: ['Muted natural palette (sage, cream, rose)', 'Floral SVG accents, soft rounded cards', 'Warm serif or script headings'],
+    promptFragment:
+      'Use Cottagecore: cosy pastoral nostalgia in warm cream, sage and dusty rose, with floral and botanical motifs, soft serif or handwritten headings, and gentle rounded shapes. Hand-made, comforting, a little vintage.',
+    conflictsWith: ['cyberpunk-neon', 'constructivism'],
+  },
+  {
+    id: 'quiet-luxury',
+    name: 'Quiet Luxury',
+    category: 'vibe',
+    philosophy: 'Whispered wealth — warm neutrals, fine serifs, huge whitespace.',
+    markers: [
+      'Warm beige / stone / off-black palette',
+      'Refined high-contrast serif',
+      'Enormous whitespace and small type',
+      'Almost no color, no ornament',
+    ],
+    cssHints: ['Beige/stone neutrals, near-black text', 'Refined serif display at calm sizes', 'Very generous margins, hairline rules'],
+    promptFragment:
+      'Use Quiet Luxury: whispered wealth in warm beige, stone and off-black, a refined high-contrast serif, enormous whitespace, small confident type and almost no color or ornament. Expensive by restraint, like The Row.',
+    conflictsWith: ['maximalism', 'y2k', 'pop-art'],
+  },
+  {
+    id: 'scandinavian',
+    name: 'Scandinavian',
+    category: 'vibe',
+    philosophy: 'Hygge and function — light wood, muted calm, honest layout.',
+    markers: [
+      'Light woods and soft greys',
+      'Muted, desaturated accents',
+      'Functional, uncluttered layout',
+      'Clean humanist sans',
+    ],
+    cssHints: ['Pale wood + soft grey palette', 'Lots of light, soft shadows', 'Humanist sans, calm spacing'],
+    promptFragment:
+      'Use Scandinavian / Nordic design: light woods and soft greys, muted desaturated accents, an honest uncluttered layout, humanist sans typography and plenty of light. Functional, calm, cosy — hygge as UI.',
+    conflictsWith: ['cyberpunk-neon', 'maximalism'],
+  },
+  {
+    id: 'japandi',
+    name: 'Japandi',
+    category: 'vibe',
+    philosophy: 'Japanese restraint meets Nordic warmth — calm, natural, spare.',
+    markers: [
+      'Warm neutrals + charcoal + clay',
+      'Natural materials, matte surfaces',
+      'Asymmetry and intentional emptiness (ma)',
+      'Quiet humanist or serif type',
+    ],
+    cssHints: ['Warm neutral + charcoal palette', 'Matte surfaces, generous empty space', 'Asymmetric balance, soft natural texture'],
+    promptFragment:
+      'Use Japandi: Japanese restraint blended with Nordic warmth — warm neutrals, charcoal and clay, matte natural surfaces, deliberate emptiness (ma) and asymmetric balance, with quiet humanist or serif type. Spare and grounded.',
+    conflictsWith: ['maximalism', 'y2k'],
+  },
+  {
+    id: 'acid-design',
+    name: 'Acid Graphics',
+    category: 'vibe',
+    philosophy: 'Chrome, acid color and melted type — the anti-clean reaction.',
+    markers: [
+      'Liquid chrome / metallic type',
+      'Acid green, electric blue, hot pink',
+      'Distorted, melted, warped shapes',
+      'Y2K-adjacent but harder, glossier',
+    ],
+    cssHints: ['Chrome gradient text (silver→blue)', 'Acid saturated palette on dark', 'Warp/distort transforms, gloss highlights'],
+    promptFragment:
+      'Use Acid Graphics: liquid-chrome metallic type, an acid palette (toxic green, electric blue, hot pink) on dark, melted and warped shapes, and glossy highlights. The hard, glossy reaction to clean minimalism.',
+    conflictsWith: ['ultra-minimalism', 'quiet-luxury', 'dieter-rams'],
+  },
+
+  // ─────────────────────────── Spatial (extended again) ───────────────────────────
+  {
+    id: 'visionos',
+    name: 'visionOS / Spatial',
+    category: 'spatial',
+    philosophy: 'Glass floating in space — depth, light and eye-driven focus.',
+    markers: [
+      'Frosted glass panels floating over the world',
+      'Strong soft shadows for layered depth',
+      'Bright hover/focus highlight (eye-driven)',
+      'Fully rounded, generously padded surfaces',
+    ],
+    motion: 'Panels lift and brighten on focus; gentle parallax with viewpoint.',
+    cssHints: ['Heavy frosted glass + large soft shadows', 'Big radii, generous padding', 'Bright focus highlight on hover'],
+    promptFragment:
+      'Use a visionOS / spatial style: frosted-glass panels floating in space with strong soft shadows for depth, very rounded and generously padded surfaces, and a bright highlight on the focused element as if gaze-driven. Light and dimensional.',
+    conflictsWith: ['neo-brutalism', 'anti-design'],
+  },
+
+  // ─────────────────────────── AI-native (extended again) ───────────────────────────
+  {
+    id: 'claymation-3d',
+    name: '3D Illustration',
+    category: 'ai-native',
+    philosophy: 'Soft rendered 3D — the Spline / claymation hero aesthetic.',
+    markers: [
+      'Soft-shaded 3D blobs and props',
+      'Pastel, candy-like materials',
+      'Big rounded forms with soft shadows',
+      'Playful depth and floating objects',
+    ],
+    motion: 'Objects bob and rotate slowly; soft spring on hover.',
+    cssHints: ['Rendered 3D hero imagery (Spline / Blender)', 'Pastel matte materials, soft global shadows', 'Big rounded forms, gentle float animation'],
+    promptFragment:
+      'Use a soft 3D illustration style (Spline / claymation): pastel matte 3D blobs and props with soft global shadows, big rounded candy-like forms, and playful floating depth. Friendly, tactile and modern.',
+    conflictsWith: ['neo-brutalism', 'swiss-modernism'],
+  },
 ];
 
 export const stylesByCategory = (cat: string) => STYLES.filter((s) => s.category === cat);

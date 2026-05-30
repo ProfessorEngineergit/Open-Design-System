@@ -33,10 +33,20 @@ Every look in Looksmith is a small stack of decisions. They're independent on pu
 - **Backdrop** — the scene a glass surface refracts, so translucency reads as real depth instead of a grey blur.
 - **Surface** — the material itself: glass, clay, brutalist, soft-extruded. This is your *look*.
 - **Shape** — how corners are treated, from hard 90° to full pills to organic blobs. Works the same over any surface.
-- **Texture** — an overlay: film grain, paper tooth, static, CRT scanlines. Also surface-agnostic.
-- **Type** — the voice, from a quiet body grotesque up to a wide display face.
+- **Texture** — an overlay: film grain, paper tooth, static, CRT scanlines — plus effects borrowed from other looks (a liquid-glass pane, an aurora wash, a neon glow, holographic shimmer) that lay over whatever surface you picked.
+- **Type** — the voice, from a quiet body grotesque up to a wide display face. Some shapes even nudge it — pick *Organic* and the headings soften to a rounded face to match.
 
-Pick one surface, then layer a shape and a texture on top. Because shape and texture only touch corners and overlays, they compose cleanly with *any* surface — so Claymorphism-with-sharp-corners-and-paper-grain is a real, previewable thing, not a setting that quietly does nothing.
+Pick one surface, then layer a shape and a texture on top. Because shape and texture only touch corners and overlays, they compose cleanly with *any* surface — so Claymorphism-with-sharp-corners-and-paper-grain, or Bauhaus-with-a-glass-pane, is a real, previewable thing, not a setting that quietly does nothing.
+
+### …and it's not a mockup
+
+Every preview in Looksmith is the real component, rendered live. Here's the editor's own preview, component canvas and CSS inspector, pulled straight out of the running app:
+
+<div align="center">
+
+<img src="docs/exploded-real.png" alt="An exploded montage of three live screenshots from Looksmith: the mix preview, the component canvas, and the resolved-CSS inspector." width="820">
+
+</div>
 
 ---
 

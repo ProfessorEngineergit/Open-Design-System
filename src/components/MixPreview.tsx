@@ -25,6 +25,8 @@ export function MixPreview({ sel }: Props) {
 
   const shape = sel.shape ? shapeById(sel.shape) : null;
   const texture = sel.texture ? textureById(sel.texture) : null;
+  // a shape can call for its own heading face (organic → soft rounded)
+  const shapeHeadingFont = shape?.headingFont;
 
   const lookName = ranked[0]?.style.name ?? 'Foundation only';
   const kicker = [lookName, shape?.name, texture && texture.id !== 'clean' ? texture.name : null]
@@ -58,10 +60,23 @@ export function MixPreview({ sel }: Props) {
         >
           {grain > 0 && <span className="grain-overlay" style={{ opacity: grain }} />}
           {scanlines && <span className="scanline-overlay" />}
+          {texture?.effect && (
+            <span
+              className={`tex-effect tex-${texture.kind}`}
+              style={
+                texture.kind === 'neon'
+                  ? {
+                      boxShadow: `inset 0 0 28px hsla(${sel.visuals.accentHue} 90% 60% / 0.55)`,
+                      border: `1px solid hsla(${sel.visuals.accentHue} 90% 66% / 0.85)`,
+                    }
+                  : undefined
+              }
+            />
+          )}
           <h4
             style={{
               ...lead.heading,
-              fontFamily: lead.heading.fontFamily ?? headingFont,
+              fontFamily: shapeHeadingFont ?? lead.heading.fontFamily ?? headingFont,
               fontSize: 18,
               margin: 0,
               position: 'relative',

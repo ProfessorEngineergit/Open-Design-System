@@ -758,6 +758,55 @@
   mix-blend-mode: multiply;
   opacity: 0.6;
 }
+/* effects borrowed from other looks, layered over the surface */
+.tex-effect {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.tex-glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5), transparent 42%, rgba(255, 255, 255, 0.18));
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+  mix-blend-mode: screen;
+}
+.tex-aurora {
+  background:
+    radial-gradient(40% 50% at 25% 25%, rgba(176, 107, 255, 0.55), transparent 70%),
+    radial-gradient(45% 55% at 80% 35%, rgba(255, 107, 191, 0.5), transparent 72%),
+    radial-gradient(50% 60% at 55% 90%, rgba(107, 224, 192, 0.5), transparent 70%);
+  filter: blur(8px);
+  mix-blend-mode: screen;
+  opacity: 0.7;
+}
+.tex-holographic {
+  background: conic-gradient(
+    from 200deg,
+    rgba(255, 209, 240, 0.5),
+    rgba(192, 240, 255, 0.5),
+    rgba(255, 242, 192, 0.5),
+    rgba(216, 197, 255, 0.5),
+    rgba(255, 209, 240, 0.5)
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.55;
+}
+/* tex-neon styling comes inline (uses the live accent hue) */
+
+/* texture-chip swatches for the borrowed effects */
+.axis-chip-tex.tex-glass {
+  background: linear-gradient(135deg, #cfe3f5, #a9c7e8);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+.axis-chip-tex.tex-aurora {
+  background: conic-gradient(from 90deg, #b06bff, #ff6bbf, #6be0c0, #b06bff);
+}
+.axis-chip-tex.tex-neon {
+  background: #0a0a16;
+  box-shadow: 0 0 6px 1px #00e5ff, inset 0 0 4px #00e5ff;
+}
+.axis-chip-tex.tex-holographic {
+  background: conic-gradient(from 200deg, #ffd1f0, #c0f0ff, #fff2c0, #d8c5ff, #ffd1f0);
+}
 
 /* ── Base look slot ─────────────────────────── */
 .look-slot {

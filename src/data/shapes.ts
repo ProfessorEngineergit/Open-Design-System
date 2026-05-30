@@ -12,6 +12,8 @@ export interface ShapeOption {
   buttonRadius: number;
   /** optional fancy border-radius string for an organic, hand-shaped corner */
   organic?: string;
+  /** some shapes call for a different heading face to match (e.g. organic → rounded) */
+  headingFont?: string;
   promptFragment: string;
 }
 
@@ -60,12 +62,13 @@ export const SHAPE_OPTIONS: ShapeOption[] = [
   {
     id: 'organic',
     name: 'Organic',
-    hint: 'Asymmetric, hand-shaped blobs.',
+    hint: 'Asymmetric blobs + a softer, rounded typeface.',
     radius: 30,
     buttonRadius: 999,
     organic: '42% 58% 68% 32% / 42% 45% 55% 58%',
+    headingFont: "'Quicksand', 'Nunito', system-ui, sans-serif",
     promptFragment:
-      'Surfaces use organic, asymmetric corners (uneven per-corner border-radius, blob-like) so nothing feels machine-perfect; buttons stay pill-shaped.',
+      'Surfaces use organic, asymmetric corners (uneven per-corner border-radius, blob-like) so nothing feels machine-perfect; buttons stay pill-shaped. Pair it with a soft, rounded typeface (Quicksand / Nunito) so the type matches the hand-shaped feel.',
   },
 ];
 

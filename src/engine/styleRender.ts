@@ -801,6 +801,225 @@ export function renderStyle(id: string): SampleStyle {
         body: { color: '#a8b0d8' },
       };
 
+    // ── Structure (systems & eras) ──
+    case 'flat-design':
+      return {
+        ...base,
+        scene: { background: '#ecf0f1' },
+        surface: { background: '#ffffff', border: 'none', borderRadius: 6, boxShadow: 'none', color: '#2c3e50' },
+        button: { background: '#1abc9c', color: '#fff', border: 'none', borderRadius: 4 },
+        heading: { color: '#2c3e50', fontWeight: 700 },
+        body: { color: '#7f8c8d' },
+      };
+    case 'material-2':
+      return {
+        ...base,
+        scene: { background: '#fafafa' },
+        surface: { background: '#ffffff', border: 'none', borderRadius: 4, boxShadow: '0 1px 3px rgba(0,0,0,0.2), 0 1px 2px rgba(0,0,0,0.12)', color: '#212121' },
+        button: { background: '#6200ee', color: '#fff', border: 'none', borderRadius: 4 },
+        heading: { color: '#212121', fontWeight: 600 },
+        body: { color: '#5f5f5f' },
+      };
+    case 'metro':
+      return {
+        ...base,
+        scene: { background: '#1f1f1f' },
+        surface: { background: '#2d2d30', border: 'none', borderRadius: 0, boxShadow: 'none', color: '#ffffff' },
+        button: { background: '#00a4ef', color: '#fff', border: 'none', borderRadius: 0 },
+        heading: { color: '#ffffff', fontWeight: 300 },
+        body: { color: '#c8c8c8' },
+      };
+    case 'ibm-carbon':
+      return {
+        ...base,
+        scene: { background: '#f4f4f4' },
+        surface: { background: '#ffffff', border: '1px solid #e0e0e0', borderRadius: 0, boxShadow: 'none', color: '#161616' },
+        button: { background: '#0f62fe', color: '#fff', border: 'none', borderRadius: 0 },
+        heading: { color: '#161616', fontWeight: 600 },
+        body: { color: '#525252' },
+        mono: true,
+      };
+    case 'modern-minimal':
+      return {
+        ...base,
+        scene: { background: '#fafafa' },
+        surface: { background: '#ffffff', border: '1px solid rgba(0,0,0,0.08)', borderRadius: 10, boxShadow: '0 1px 2px rgba(0,0,0,0.06)', color: '#18181b' },
+        button: { background: '#18181b', color: '#fafafa', border: 'none', borderRadius: 8 },
+        heading: { color: '#18181b', fontWeight: 600 },
+        body: { color: '#71717a' },
+      };
+    case 'fintech':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(160deg, #efeafc, #e7ecfb)' },
+        surface: { background: '#ffffff', border: 'none', borderRadius: 18, boxShadow: '0 10px 26px rgba(60,40,160,0.14)', color: '#0f1024' },
+        button: { background: '#5b3df5', color: '#fff', border: 'none', borderRadius: 12 },
+        heading: { color: '#0f1024', fontWeight: 700 },
+        body: { color: '#6b6b80' },
+      };
+
+    // ── Morphism (extended again) ──
+    case 'skeuominimalism':
+      return {
+        ...base,
+        scene: { background: '#eef0f3' },
+        surface: {
+          background: 'linear-gradient(180deg,#ffffff,#f1f3f6)',
+          border: '1px solid rgba(28,25,20,0.08)',
+          borderRadius: 14,
+          boxShadow: '0 6px 14px rgba(40,50,70,0.14), inset 0 1px 0 rgba(255,255,255,0.9)',
+          color: '#2a2e35',
+        },
+        button: { background: 'linear-gradient(180deg,#4a6cf7,#3a55d8)', color: '#fff', border: 'none', borderRadius: 10, boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.4), 0 3px 8px rgba(58,85,216,0.4)' },
+        heading: { color: '#2a2e35', fontWeight: 600 },
+        body: { color: '#6a7080' },
+      };
+    case 'duotone':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(135deg, #1f2a6b, #ff4d8d)' },
+        surface: { background: 'rgba(20,24,60,0.7)', border: '1px solid rgba(255,77,141,0.5)', borderRadius: 8, boxShadow: '0 10px 24px rgba(20,20,60,0.4)', color: '#ffd9e6' },
+        button: { background: '#ff4d8d', color: '#1a1030', border: 'none', borderRadius: 6 },
+        heading: { color: '#ff7db0', fontWeight: 800 },
+        body: { color: '#aeb6e8' },
+      };
+
+    // ── Vibe (movements & subcultures) ──
+    case 'bauhaus':
+      return {
+        ...base,
+        scene: { background: '#f0e9da' },
+        surface: { background: '#ffffff', border: '2px solid #1a1814', borderRadius: 0, boxShadow: 'none', color: '#1a1814' },
+        button: { background: '#d6202a', color: '#fff', border: '2px solid #1a1814', borderRadius: 0 },
+        heading: { color: '#1a1814', fontWeight: 700 },
+        body: { color: '#4a463c' },
+      };
+    case 'art-deco':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(160deg,#0e211c,#08110e)' },
+        surface: { background: '#0c1512', border: '1px solid #c9a24b', borderRadius: 2, boxShadow: '0 0 0 3px rgba(201,162,75,0.18)', color: '#e9dcb8' },
+        button: { background: 'linear-gradient(180deg,#e6c878,#b8902f)', color: '#0e211c', border: 'none', borderRadius: 1 },
+        heading: { color: '#d9b85a', fontWeight: 700, fontFamily: "'Playfair Display', Georgia, serif", letterSpacing: '0.08em' },
+        body: { color: '#b8b09a' },
+      };
+    case 'art-nouveau':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(160deg,#efe6d2,#ddc9a8)' },
+        surface: { background: '#f6efda', border: '1px solid #a98b4a', borderRadius: 28, boxShadow: '0 6px 16px rgba(90,60,20,0.2)', color: '#4a3320' },
+        button: { background: '#6b7a3a', color: '#f6efda', border: 'none', borderRadius: 999 },
+        heading: { color: '#5a3a22', fontWeight: 700, fontFamily: "'Playfair Display', Georgia, serif" },
+        body: { color: '#6a5c44' },
+        grain: 0.12,
+      };
+    case 'constructivism':
+      return {
+        ...base,
+        scene: { background: '#ece6da' },
+        surface: { background: '#ffffff', border: '2px solid #1a1814', borderRadius: 0, boxShadow: '6px 6px 0 0 #d6202a', color: '#1a1814' },
+        button: { background: '#d6202a', color: '#fff', border: 'none', borderRadius: 0 },
+        heading: { color: '#1a1814', fontWeight: 800, letterSpacing: '0.02em' },
+        body: { color: '#3a352c' },
+      };
+    case 'pop-art':
+      return {
+        ...base,
+        scene: { background: 'radial-gradient(#ffd60a 22%, transparent 23%) 0 0/14px 14px, #ffe14d' },
+        surface: { background: '#ffffff', border: '3px solid #000000', borderRadius: 0, boxShadow: '6px 6px 0 0 #000', color: '#000000' },
+        button: { background: '#ff2b56', color: '#fff', border: '3px solid #000', borderRadius: 0 },
+        heading: { color: '#0040c0', fontWeight: 900 },
+        body: { color: '#222222' },
+      };
+    case 'grunge':
+      return {
+        ...base,
+        scene: { background: '#2a2724' },
+        surface: { background: '#f0e8d8', border: 'none', borderRadius: 2, boxShadow: '0 8px 18px rgba(0,0,0,0.5)', color: '#1a1814', transform: 'rotate(-1deg)' },
+        button: { background: '#1a1814', color: '#f0e8d8', border: 'none', borderRadius: 0 },
+        heading: { color: '#1a1814', fontWeight: 800 },
+        body: { color: '#4a443a' },
+        grain: 0.3,
+      };
+    case 'steampunk':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(160deg,#2a1d10,#1a120a)' },
+        surface: { background: 'linear-gradient(180deg,#b8894a,#8a5f30)', border: '1px solid #5a3a1c', borderRadius: 8, boxShadow: 'inset 0 1px 0 rgba(255,230,180,0.4), 0 8px 18px rgba(0,0,0,0.5)', color: '#2a1c0c' },
+        button: { background: 'linear-gradient(180deg,#d8b06a,#9a6f38)', color: '#2a1c0c', border: '1px solid #5a3a1c', borderRadius: 6 },
+        heading: { color: '#2a1c0c', fontWeight: 700, fontFamily: "'Playfair Display', Georgia, serif" },
+        body: { color: '#3e2c16' },
+        grain: 0.16,
+      };
+    case 'cottagecore':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(160deg,#dfe6cf,#f3ecd9)' },
+        surface: { background: '#fbf6ea', border: '1px solid #cdbfa0', borderRadius: 18, boxShadow: '0 6px 14px rgba(120,110,70,0.18)', color: '#5a4a30' },
+        button: { background: '#8a9a6a', color: '#fbf6ea', border: 'none', borderRadius: 999 },
+        heading: { color: '#5a4630', fontWeight: 700, fontFamily: "'Lora', Georgia, serif" },
+        body: { color: '#7a6f55' },
+      };
+    case 'quiet-luxury':
+      return {
+        ...base,
+        scene: { background: '#e8e2d6' },
+        surface: { background: 'transparent', border: 'none', borderRadius: 0, boxShadow: 'none', color: '#2a2620' },
+        button: { background: 'transparent', color: '#2a2620', border: '1px solid #2a2620', borderRadius: 0 },
+        heading: { color: '#2a2620', fontWeight: 500, fontFamily: "'Playfair Display', Georgia, serif" },
+        body: { color: '#6a6456' },
+      };
+    case 'scandinavian':
+      return {
+        ...base,
+        scene: { background: '#f3efe9' },
+        surface: { background: '#ffffff', border: 'none', borderRadius: 12, boxShadow: '0 6px 16px rgba(60,50,40,0.1)', color: '#2e2a24' },
+        button: { background: '#b08968', color: '#fff', border: 'none', borderRadius: 10 },
+        heading: { color: '#2e2a24', fontWeight: 600 },
+        body: { color: '#7a746a' },
+      };
+    case 'japandi':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(160deg,#e7e1d5,#d8cfbd)' },
+        surface: { background: '#f4efe6', border: '1px solid #cabfa9', borderRadius: 6, boxShadow: '0 4px 12px rgba(70,60,40,0.12)', color: '#2a2620' },
+        button: { background: '#3a352e', color: '#f4efe6', border: 'none', borderRadius: 4 },
+        heading: { color: '#2a2620', fontWeight: 600 },
+        body: { color: '#6a6354' },
+        grain: 0.1,
+      };
+    case 'acid-design':
+      return {
+        ...base,
+        scene: { background: '#07070c' },
+        surface: { background: '#10101a', border: '1px solid #39ff14', borderRadius: 4, boxShadow: '0 0 18px rgba(57,255,20,0.4)', color: '#e8ffe0' },
+        button: { background: 'linear-gradient(180deg,#dfe8f0,#8fb0d8)', color: '#07070c', border: 'none', borderRadius: 2 },
+        heading: { color: '#39ff14', fontWeight: 800 },
+        body: { color: '#9aa0b0' },
+      };
+
+    // ── Spatial (extended again) ──
+    case 'visionos':
+      return {
+        ...base,
+        scene: { background: 'radial-gradient(50% 60% at 30% 30%, #b7c8e8, transparent 70%), radial-gradient(50% 60% at 75% 60%, #e8c6dc, transparent 72%), linear-gradient(160deg,#eef1f7,#dfe3ec)' },
+        surface: { background: 'rgba(255,255,255,0.5)', border: '1px solid rgba(255,255,255,0.7)', borderRadius: 28, boxShadow: '0 24px 50px rgba(40,40,80,0.28), inset 0 1px 1px rgba(255,255,255,0.8)', backdropFilter: 'blur(20px) saturate(160%)', color: '#1a1a2a' },
+        button: { background: 'rgba(255,255,255,0.6)', color: '#1a1a2a', border: '1px solid rgba(255,255,255,0.8)', borderRadius: 999, backdropFilter: 'blur(8px)' },
+        heading: { color: '#1a1a2a', fontWeight: 600 },
+        body: { color: '#4a4a5a' },
+      };
+
+    // ── AI-native (extended again) ──
+    case 'claymation-3d':
+      return {
+        ...base,
+        scene: { background: 'linear-gradient(160deg,#ffe6f2,#e6ecff)' },
+        surface: { background: '#ffffff', border: 'none', borderRadius: 28, boxShadow: '0 18px 36px rgba(150,120,200,0.28)', color: '#3a3550' },
+        button: { background: 'linear-gradient(180deg,#ff9ec7,#ff7db0)', color: '#fff', border: 'none', borderRadius: 999, boxShadow: 'inset 0 -3px 6px rgba(200,90,150,0.5), 0 6px 14px rgba(255,140,190,0.4)' },
+        heading: { color: '#3a3550', fontWeight: 700 },
+        body: { color: '#6a6388' },
+      };
+
     default:
       return base;
   }
