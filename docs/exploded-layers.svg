@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 600" font-family="'Inter', system-ui, sans-serif">
+  <defs>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#1a1814" flood-opacity="0.16"/>
+    </filter>
+    <linearGradient id="orbA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff9d6e"/><stop offset="1" stop-color="#e0673a"/>
+    </linearGradient>
+    <linearGradient id="orbB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9fc3e8"/><stop offset="1" stop-color="#5b86b3"/>
+    </linearGradient>
+    <linearGradient id="orbC" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8c08a"/><stop offset="1" stop-color="#b89a5a"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="760" height="600" rx="24" fill="#efece3"/>
+
+  <!-- explosion guide lines -->
+  <polyline points="244,50 198,150 152,250 106,350 60,450" fill="none" stroke="#cc785c" stroke-opacity="0.5" stroke-width="1.5" stroke-dasharray="3 5"/>
+  <polyline points="544,150 498,250 452,350 406,450 360,550" fill="none" stroke="#cc785c" stroke-opacity="0.5" stroke-width="1.5" stroke-dasharray="3 5"/>
+
+  <!-- ░░ Backdrop ░░ -->
+  <g transform="translate(60,450)">
+    <clipPath id="cBack"><rect width="300" height="100" rx="16"/></clipPath>
+    <rect width="300" height="100" rx="16" fill="#fbf9f4" stroke="rgba(28,25,20,0.14)" filter="url(#soft)"/>
+    <g clip-path="url(#cBack)">
+      <rect width="300" height="100" fill="#ece5d6"/>
+      <circle cx="58" cy="40" r="46" fill="url(#orbA)" opacity="0.92"/>
+      <circle cx="210" cy="34" r="52" fill="url(#orbB)" opacity="0.9"/>
+      <circle cx="150" cy="104" r="40" fill="url(#orbC)" opacity="0.9"/>
+    </g>
+    <circle cx="312" cy="50" r="5" fill="#cc785c"/>
+    <text x="326" y="46" font-size="18" font-weight="700" fill="#1a1814">Backdrop</text>
+    <text x="326" y="64" font-size="13" fill="#5c574c">the scene light bends through</text>
+  </g>
+
+  <!-- ░░ Surface ░░ -->
+  <g transform="translate(106,350)">
+    <rect width="300" height="100" rx="16" fill="url(#glass)" stroke="rgba(255,255,255,0.7)" filter="url(#soft)"/>
+    <rect x="1" y="1" width="298" height="40" rx="15" fill="#ffffff" opacity="0.35"/>
+    <circle cx="312" cy="50" r="5" fill="#cc785c"/>
+    <text x="326" y="46" font-size="18" font-weight="700" fill="#1a1814">Surface</text>
+    <text x="326" y="64" font-size="13" fill="#5c574c">glass, clay, brutalist — the material</text>
+  </g>
+
+  <!-- ░░ Shape ░░ -->
+  <g transform="translate(152,250)">
+    <rect width="300" height="100" rx="28" fill="#fbf9f4" stroke="rgba(28,25,20,0.14)" filter="url(#soft)"/>
+    <path d="M20 100 Q20 64 56 64" fill="none" stroke="#cc785c" stroke-width="2.5"/>
+    <path d="M280 0 Q244 0 244 36" fill="none" stroke="#cc785c" stroke-width="2.5"/>
+    <text x="150" y="58" font-size="13" fill="#8a8475" text-anchor="middle" font-style="italic">radius</text>
+    <circle cx="312" cy="50" r="5" fill="#cc785c"/>
+    <text x="326" y="46" font-size="18" font-weight="700" fill="#1a1814">Shape</text>
+    <text x="326" y="64" font-size="13" fill="#5c574c">how the corners are treated</text>
+  </g>
+
+  <!-- ░░ Texture ░░ -->
+  <g transform="translate(198,150)">
+    <clipPath id="cTex"><rect width="300" height="100" rx="16"/></clipPath>
+    <rect width="300" height="100" rx="16" fill="#fbf9f4" stroke="rgba(28,25,20,0.14)" filter="url(#soft)"/>
+    <g clip-path="url(#cTex)" fill="#1a1814" opacity="0.16">
+      <circle cx="24" cy="20" r="1.4"/><circle cx="60" cy="44" r="1.4"/><circle cx="96" cy="16" r="1.4"/><circle cx="132" cy="60" r="1.4"/><circle cx="168" cy="30" r="1.4"/><circle cx="204" cy="70" r="1.4"/><circle cx="240" cy="22" r="1.4"/><circle cx="276" cy="52" r="1.4"/>
+      <circle cx="42" cy="78" r="1.4"/><circle cx="114" cy="86" r="1.4"/><circle cx="186" cy="14" r="1.4"/><circle cx="258" cy="84" r="1.4"/><circle cx="78" cy="64" r="1.4"/><circle cx="150" cy="36" r="1.4"/><circle cx="222" cy="48" r="1.4"/>
+    </g>
+    <circle cx="312" cy="50" r="5" fill="#cc785c"/>
+    <text x="326" y="46" font-size="18" font-weight="700" fill="#1a1814">Texture</text>
+    <text x="326" y="64" font-size="13" fill="#5c574c">grain, paper or scanlines on top</text>
+  </g>
+
+  <!-- ░░ Type ░░ -->
+  <g transform="translate(244,50)">
+    <rect width="300" height="100" rx="16" fill="#fbf9f4" stroke="rgba(28,25,20,0.14)" filter="url(#soft)"/>
+    <text x="22" y="68" font-size="46" font-weight="600" font-family="'Fraunces', Georgia, serif" fill="#1a1814">Aa</text>
+    <rect x="104" y="30" width="120" height="9" rx="4.5" fill="#1a1814" opacity="0.8"/>
+    <rect x="104" y="48" width="150" height="7" rx="3.5" fill="#5c574c" opacity="0.6"/>
+    <rect x="104" y="64" width="86" height="7" rx="3.5" fill="#5c574c" opacity="0.4"/>
+    <circle cx="312" cy="50" r="5" fill="#cc785c"/>
+    <text x="326" y="46" font-size="18" font-weight="700" fill="#1a1814">Type</text>
+    <text x="326" y="64" font-size="13" fill="#5c574c">the voice, body to display</text>
+  </g>
+</svg>

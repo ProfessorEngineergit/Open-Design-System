@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" font-family="'Inter', system-ui, sans-serif">
+  <defs>
+    <filter id="gsoft" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#1a1814" flood-opacity="0.18"/>
+    </filter>
+    <linearGradient id="gOrbA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9d6e"/><stop offset="1" stop-color="#e0673a"/></linearGradient>
+    <linearGradient id="gOrbB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9fc3e8"/><stop offset="1" stop-color="#5b86b3"/></linearGradient>
+    <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.6"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.22"/></linearGradient>
+    <linearGradient id="gBevel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/><stop offset="0.4" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.5"/></linearGradient>
+    <linearGradient id="gBtn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d98a6e"/><stop offset="1" stop-color="#b5603e"/></linearGradient>
+  </defs>
+
+  <rect width="760" height="520" rx="24" fill="#efece3"/>
+
+  <!-- explosion axis -->
+  <polyline points="198,50 152,160 106,270 60,380" fill="none" stroke="#cc785c" stroke-opacity="0.5" stroke-width="1.5" stroke-dasharray="3 5"/>
+  <polyline points="478,150 432,260 386,370 340,480" fill="none" stroke="#cc785c" stroke-opacity="0.5" stroke-width="1.5" stroke-dasharray="3 5"/>
+
+  <!-- ░ Refraction (bottom) ░ -->
+  <g transform="translate(60,380)">
+    <clipPath id="gcRef"><rect width="280" height="100" rx="20"/></clipPath>
+    <rect width="280" height="100" rx="20" fill="#ece5d6" filter="url(#gsoft)"/>
+    <g clip-path="url(#gcRef)">
+      <circle cx="64" cy="40" r="50" fill="url(#gOrbA)" opacity="0.9"/>
+      <circle cx="206" cy="60" r="56" fill="url(#gOrbB)" opacity="0.88"/>
+      <path d="M0 70 Q35 50 70 70 T140 70 T210 70 T280 70" fill="none" stroke="#ffffff" stroke-opacity="0.5" stroke-width="3"/>
+    </g>
+    <circle cx="292" cy="50" r="5" fill="#cc785c"/>
+    <text x="306" y="46" font-size="18" font-weight="700" fill="#1a1814">Refraction</text>
+    <text x="306" y="64" font-size="13" fill="#5c574c">SVG feDisplacementMap bends the scene</text>
+  </g>
+
+  <!-- ░ Translucent fill ░ -->
+  <g transform="translate(106,270)">
+    <rect width="280" height="100" rx="20" fill="url(#gGlass)" filter="url(#gsoft)"/>
+    <circle cx="292" cy="50" r="5" fill="#cc785c"/>
+    <text x="306" y="46" font-size="18" font-weight="700" fill="#1a1814">Fill</text>
+    <text x="306" y="64" font-size="13" fill="#5c574c">a ~18% white tint, saturated blur</text>
+  </g>
+
+  <!-- ░ Border + bevel ░ -->
+  <g transform="translate(152,160)">
+    <rect width="280" height="100" rx="20" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.5" filter="url(#gsoft)"/>
+    <rect x="1" y="1" width="278" height="98" rx="19" fill="none" stroke="url(#gBevel)" stroke-width="2"/>
+    <circle cx="292" cy="50" r="5" fill="#cc785c"/>
+    <text x="306" y="46" font-size="18" font-weight="700" fill="#1a1814">Border &amp; bevel</text>
+    <text x="306" y="64" font-size="13" fill="#5c574c">a hairline rim that catches the light</text>
+  </g>
+
+  <!-- ░ Content (top) ░ -->
+  <g transform="translate(198,50)">
+    <rect width="280" height="100" rx="20" fill="#fbf9f4" filter="url(#gsoft)"/>
+    <text x="22" y="34" font-size="11" font-weight="700" letter-spacing="1.2" fill="#cc785c">LIVE PREVIEW</text>
+    <text x="22" y="60" font-size="19" font-weight="600" font-family="'Fraunces', Georgia, serif" fill="#1a1814">Your component</text>
+    <rect x="22" y="72" width="92" height="20" rx="10" fill="url(#gBtn)"/>
+    <text x="40" y="86" font-size="11" font-weight="600" fill="#ffffff">Primary</text>
+    <circle cx="292" cy="50" r="5" fill="#cc785c"/>
+    <text x="306" y="46" font-size="18" font-weight="700" fill="#1a1814">Content</text>
+    <text x="306" y="64" font-size="13" fill="#5c574c">your type and components, on top</text>
+  </g>
+</svg>
